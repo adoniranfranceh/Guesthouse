@@ -12,7 +12,7 @@
 
   <body>
     <nav>
-      <%= link_to 'Cadastrar Pousada', new_admin_session_path %>
+      <%= dynamic_url_inn %>
       <% if admin_signed_in? %>
         <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
       <% end %>

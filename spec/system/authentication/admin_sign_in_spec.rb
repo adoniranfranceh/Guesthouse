@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Administrador se autentuca' do
+describe 'Administrador se autentica' do
   it 'com sucesso' do
   	# Arrange
     admin = Admin.create!(name: 'admin', email: 'admin@admin.com', password: 'password')

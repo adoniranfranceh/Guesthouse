@@ -4,5 +4,23 @@ pt-BR:
       inn: Pousada
     attributes:
       inn:
+        brand_name: 'Nome Fantasia'
+        corporate_name: 'Razão Social'
+        registration_number: 'CNPJ'
+        phone: 'Telefone'
         email: 'E-mail'
-        accepts_pets: 'Aceita'
+        address: 'Endereço'
+        neighborhood: 'Bairro'
+        city: 'Cidade'
+        state: 'Estado'
+        zip_code: 'CEP'
+        description: 'Descrição'
+        payment_methods: 'Formas de Pagamento'
+        accepts_pets: 'Entrada de Pets'
+        usage_policies: 'Políticas de Uso'
+        check_in: 'Check in'
+        check_out: 'Check out'
+    boolean:
+      accepts_pets:
+        true: 'Aceita'
+        false: 'Não aceita'
