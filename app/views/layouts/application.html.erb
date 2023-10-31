@@ -12,7 +12,7 @@
 
   <body>
     <nav>
-      <%= dynamic_url_inn %>
+      <%= dynamic_link_inn %>
       <% if admin_signed_in? %>
         <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
       <% end %>

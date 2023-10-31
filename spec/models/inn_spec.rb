@@ -47,6 +47,17 @@ RSpec.describe Inn, type: :model do
                           usage_policies: 'Não é permitido fumar', check_in: '15:00', check_out: '14:00')
       expect(guesthouse.valid?).to be_falsey
       end
+      it 'inválido quando entrada de pets estiver em branco' do
+      admin = Admin.create!(name: 'Admin', email: 'admin@admin.com', password: 'password')
+      guesthouse = Inn.new(admin: admin, brand_name: 'Pousada Árvore da Coruja', corporate_name: 'Pousada Guest LTDA',
+                          registration_number: '24469244000186', phone: '(99)91234-1234', email: 'arvore@email.com.br',
+                          address: 'Rua: Pedro Candiago, 725', neighborhood: 'Planalto', state: 'RS',
+                          city: 'Gramado', zip_code: ' 95670-000',
+                          description: 'Pousada Árvore Da Coruja oferece acomodação com lounge compartilhado.',
+                          payment_methods: 'Crédito e Débito', accepts_pets: '',
+                          usage_policies: 'Não é permitido fumar', check_in: '15:00', check_out: '14:00')
+      expect(guesthouse.valid?).to be_falsey
+      end
     end
     context 'uniqueness' do
       it 'false quando cnpj se repetir' do
@@ -58,7 +69,7 @@ RSpec.describe Inn, type: :model do
                             description: 'Pousada Árvore Da Coruja oferece acomodação com lounge compartilhado.',
                             payment_methods: 'Crédito e Débito', accepts_pets: true,
                             usage_policies: 'Não é permitido fumar', check_in: '15:00', check_out: '14:00')
-        other_guesthouse = Inn.new(admin: admin, brand_name: 'Pousada Nascer do', corporate_name: 'Sun LTDA',
+        other_guesthouse = Inn.new(admin: admin, brand_name: 'Pousada Nascer do Sol', corporate_name: 'Sun LTDA',
                             registration_number: '24469244000186', phone: '(99)91235-1234', email: 'sun@email.com.br',
                             address: 'Rua do Norte, 100', neighborhood: 'Lago Negro', state: 'RS',
                             city: 'Gramado', zip_code: ' 95670-000',

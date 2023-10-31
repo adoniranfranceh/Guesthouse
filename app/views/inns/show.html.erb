@@ -2,7 +2,7 @@
 <h3><%= @inn.full_description %></h3>
 
 <div>
-	<dl>
+  <dl>
     <dt>Bairro:</dt>
     <dd><%= @inn.neighborhood %></dd>
   </dl>
@@ -11,22 +11,38 @@
 <div>
   <p><%= @inn.description %></p>
   <dl>
-    <dt>Políticas de uso da pousada</dt>
+    <dt><%= Inn.human_attribute_name('usage_policies') %></dt>
     <dd><%= @inn.usage_policies %></dd>
-    <dt>Formas de pagamentos:</dt>
+    <dt><%= Inn.human_attribute_name('payment_methods') %>:</dt>
     <dd><%= @inn.payment_methods %></dd>
-  	<dt>check in:</dt>
-  	<dd><%= @inn.check_in.strftime('%H:%M') %></dd>
-  	<dt>check out:</dt>
-  	<dd><%= @inn.check_out.strftime('%H:%M') %></dd>
-  	<dt>Entrada de pets:</dt>
+    <dt><%= Inn.human_attribute_name('check_in') %>:</dt>
+    <dd><%= @inn.check_in.strftime('%H:%M') %></dd>
+    <dt><%= Inn.human_attribute_name('check_out') %>:</dt>
+    <dd><%= @inn.check_out.strftime('%H:%M') %></dd>
+    <dt><%= Inn.human_attribute_name('accepts_pets') %>:</dt>
     <dd><%= t('activerecord.boolean.accepts_pets.true') %></dd>
   </dl>
 </div>
 
 <div>
-	<dt><%= Inn.human_attribute_name('email') %>:</dt>
-	<dd><%= @inn.email %></dd>
-  <dt>Telefone:</dt>
+  <dt><%= Inn.human_attribute_name('email') %>:</dt>
+  <dd><%= @inn.email %></dd>
+  <dt><%= Inn.human_attribute_name('phone') %>:</dt>
   <dd><%= @inn.phone %></dd>
+</div>
+
+<div>
+  <% if @inn.inactive? %>
+    <%= button_to 'Tornar Ativa', active_inn_path(@inn.id) %>
+  <%  else %>
+    <%= button_to 'Tornar Inativa', inactive_inn_path(@inn.id) %>
+  <% end %>
+</div>
+
+<div>
+  <%= link_to 'Editar', edit_inn_path(@inn.id) %>
+</div>
+
+<div>
+  <%= link_to 'Voltar', root_path %>
 </div>

@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @inns = Inn.all
+    @inns = Inn.active
   end
 end
