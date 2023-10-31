@@ -1,1 +1,10 @@
 <h1>Pousadas</h1>
+<% if @inns.any? %>
+  <% @inns.each do |inn| %>
+    <h3><%= inn.brand_name %></h3>
+    <p><%= inn.city %></p>
+    <p><%= inn.description %></p>
+  <% end %>
+<% else %>
+  <p>Não existem pousadas cadastradas</p>
+<% end %>
