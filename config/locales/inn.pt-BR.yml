@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    models:
+      inn: Pousada
+    attributes:
+      inn:
+        email: 'E-mail'
+        accepts_pets: 'Aceita'

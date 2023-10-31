@@ -1,7 +1,7 @@
 <h1>Pousadas</h1>
 <% if @inns.any? %>
   <% @inns.each do |inn| %>
-    <h3><%= inn.brand_name %></h3>
+    <h3><%= link_to inn.brand_name, inn %></h3>
     <p><%= inn.city %></p>
     <p><%= inn.description %></p>
   <% end %>

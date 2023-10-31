@@ -1,0 +1,32 @@
+<h2><%= @inn.brand_name %></h2>
+<h3><%= @inn.full_description %></h3>
+
+<div>
+	<dl>
+    <dt>Bairro:</dt>
+    <dd><%= @inn.neighborhood %></dd>
+  </dl>
+  <p><%= @inn.address %>, <%= @inn.city %>, CEP <%= @inn.zip_code %> - <%= @inn.state %></p>
+</div>
+<div>
+  <p><%= @inn.description %></p>
+  <dl>
+    <dt>Políticas de uso da pousada</dt>
+    <dd><%= @inn.usage_policies %></dd>
+    <dt>Formas de pagamentos:</dt>
+    <dd><%= @inn.payment_methods %></dd>
+  	<dt>check in:</dt>
+  	<dd><%= @inn.check_in.strftime('%H:%M') %></dd>
+  	<dt>check out:</dt>
+  	<dd><%= @inn.check_out.strftime('%H:%M') %></dd>
+  	<dt>Entrada de pets:</dt>
+  	<dd><%= Inn.human_attribute_name('accepts_pets') %></dd>
+  </dl>
+</div>
+
+<div>
+	<dt><%= Inn.human_attribute_name('email') %>:</dt>
+	<dd><%= @inn.email %></dd>
+  <dt>Telefone:</dt>
+  <dd><%= @inn.phone %></dd>
+</div>
