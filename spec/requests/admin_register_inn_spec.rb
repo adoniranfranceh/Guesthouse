@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Administrador registra pousada' do
-  context 'new' do
+  context '#new' do
   it 'mas já possui uma' do
     # Arrange
      admin = Admin.create!(name: 'Jorge', email: 'jorge@email.com', password: 'password')
@@ -20,7 +20,7 @@ describe 'Administrador registra pousada' do
     end
   end
 
-  context 'create' do
+  context '#create' do
     it 'mas já possui uma' do
       # Arrange
       admin = Admin.create!(name: 'Jorge', email: 'jorge@email.com', password: 'password')

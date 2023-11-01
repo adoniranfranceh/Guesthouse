@@ -1,10 +1,13 @@
 class RoomsController < ApplicationController
-  before_action :set_room_and_inn, only:[:show, :edit, :update]
+  before_action :check_admin, only: [:edit, :update, :new, :create]
+  before_action :set_room, only: [:show, :edit, :update]
   def index
   	@rooms = Room.available
   end
 
-  def show; end
+  def show
+    @inn = Inn.find(params[:id])
+  end
 
   def new
     @inn = Inn.find(params[:inn_id])
@@ -34,9 +37,15 @@ class RoomsController < ApplicationController
 
   private
 
-  def set_room_and_inn
-    @inn = Inn.find(params[:id])
+  def set_room
     @room = Room.find(params[:id])
+  end
+
+  def check_admin
+    @inn = Inn.find(params[:inn_id])
+    if @inn.admin != current_admin
+      redirect_to root_path, notice: 'Você não possui acesso'
+    end
   end
 
   def room_params
