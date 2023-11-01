@@ -12,6 +12,8 @@
 
   <body>
     <nav>
+      <%= link_to 'Home', root_path %> | 
+      <%= link_to 'Quartos Disponíveis', rooms_path %>
       <%= dynamic_link_inn %>
       <% if admin_signed_in? %>
         <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
