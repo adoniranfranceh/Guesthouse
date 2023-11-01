@@ -16,8 +16,18 @@
 <li><%= Room.human_attribute_name('accessible_for_disabled') unless @room.accessible_for_disabled == false   %></li>
 </ul>
 
-<p>Para reservas: <%= @room.for_reservations.to_s.humanize %></p>
+<p><%= t(@room.for_reservations) %> para reservas</p>
 
 <% if @room.inn.admin == current_admin %>
   <%= link_to 'Editar', edit_inn_room_path(inn_id: @room.inn.id) %>
+
+  <div>
+    <% if @room.unavailable? %>
+      <%= button_to 'Habilitar reserva', available_inn_room_path(inn_id: @room.inn.id , id: @room.id) %>
+      <p>Quarto indisponível para nova reserva</p>
+    <% else %>
+      <p>Quarto disponível para nova reserva</p>
+      <%= button_to 'Desabilitar reserva', unavailable_inn_room_path(inn_id: @room.inn.id, id: @room.id) %>
+    <% end %>
+  </div>
 <% end %>

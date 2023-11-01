@@ -24,8 +24,8 @@ describe 'Administrador vê seus próprios quartos' do
     Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40 , max_occupancy: 4,
                 daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-    Room.create!(inn: other_guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35 , max_occupancy: 6,
-                daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true, 
+    Room.create!(inn: other_guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
+                max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
     # Act
     login_as(admin)

@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   devise_for :admins
   root "home#index"
   resources :inns, only: [:show, :new, :create, :edit, :update] do
-    resources :rooms, only: [:show, :new, :create, :edit, :update]
+    resources :rooms, only: [:show, :new, :create, :edit, :update] do
+      post :available, on: :member
+      post :unavailable, on: :member
+    end
     post :active, on: :member
     post :inactive, on: :member
     get :admin_show, on: :member

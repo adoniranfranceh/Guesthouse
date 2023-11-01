@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
-  before_action :check_admin, only: [:edit, :update, :new, :create]
-  before_action :set_room, only: [:show, :edit, :update]
+  before_action :check_admin, only: [:edit, :update, :new, :create, :available, :unavailable]
+  before_action :set_room, only: [:show, :edit, :update, :available, :unavailable]
   def index
   	@rooms = Room.available
   end
@@ -35,6 +35,16 @@ class RoomsController < ApplicationController
     render :new
   end
 
+  def available
+    @room.available!
+    redirect_to [@inn, @room], notice: 'Quarto habilitado para reservas'
+  end
+
+  def unavailable
+    @room.unavailable!
+    redirect_to [@inn, @room], notice: 'Quarto desabilitado para reservas'
+  end
+
   private
 
   def set_room
@@ -44,7 +54,7 @@ class RoomsController < ApplicationController
   def check_admin
     @inn = Inn.find(params[:inn_id])
     if @inn.admin != current_admin
-      redirect_to root_path, notice: 'Você não possui acesso'
+      redirect_to root_path, notice: 'Você não possui acesso a pousada responsável'
     end
   end
 
