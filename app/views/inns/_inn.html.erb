@@ -20,7 +20,7 @@
     <dt><%= Inn.human_attribute_name('check_out') %>:</dt>
     <dd><%= @inn.check_out.strftime('%H:%M') %></dd>
     <dt><%= Inn.human_attribute_name('accepts_pets') %>:</dt>
-    <dd><%= t('activerecord.boolean.accepts_pets.true') %></dd>
+    <dd><%= t("activerecord.boolean.accepts_pets.#{@inn.accepts_pets?}") %></dd>
   </dl>
 </div>
 

@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      price_customization: Preço Customizado
+    attributes:
+      price_customization:
+        start_date: 'Data Início'
+        end_date: 'Data Final'
+        daily_rate: 'Diária Personalizada'

@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
 
   def show
     @inn = Inn.find(params[:id])
+    @price_customizations = @room.price_customizations
   end
 
   def new
