@@ -48,7 +48,7 @@ describe 'Visitante vê detalhes de um quarto' do
 
     Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40 , max_occupancy: 4,
                 daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: false, 
-                tv: false, wardrobe: true, safe_available: '', accessible_for_disabled: true, for_reservations: :available)
+                tv: false, wardrobe: true, safe_available: false, accessible_for_disabled: true, for_reservations: :available)
     # Act
     visit root_path
     click_on('Quartos Disponíveis')

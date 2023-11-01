@@ -7,13 +7,13 @@ class CreateRooms < ActiveRecord::Migration[7.1]
       t.integer :dimension
       t.integer :max_occupancy
       t.integer :daily_rate
-      t.boolean :private_bathroom
-      t.boolean :balcony
-      t.boolean :air_conditioning
-      t.boolean :tv
-      t.boolean :wardrobe
-      t.boolean :safe_available
-      t.boolean :accessible_for_disabled
+      t.boolean :private_bathroom, default: false
+      t.boolean :balcony, default: false
+      t.boolean :air_conditioning, default: false
+      t.boolean :tv, default: false
+      t.boolean :wardrobe, default: false
+      t.boolean :safe_available, default: false
+      t.boolean :accessible_for_disabled, default: false
       t.integer :for_reservations, default: 0
 
       t.timestamps
