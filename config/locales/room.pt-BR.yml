@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      room: Quarto
+    attributes:
+      room:
+        title: 'Título'
+        description: 'Descrição'
+        dimension: 'Área do Quarto'
+        max_occupancy: 'Capacidade Máxima'
+        daily_rate: 'Diária Padrão'
+        for_reservations: 'Para Reservas'
+        private_bathroom:  'Banheiro Privado'
+        balcony: 'Varanda'
+        air_conditioning: 'Ar Condicionado'
+        tv: 'TV'
+        wardrobe: 'Guarda-Roupa'
+        safe_available:  'Cofre Disponível'
+        accessible_for_disabled: 'Acessível para pessoas com deficiência'

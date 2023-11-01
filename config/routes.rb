@@ -6,5 +6,5 @@ Rails.application.routes.draw do
     post :inactive, on: :member
   end
 
-  resources :rooms, only: [:index]
+  resources :rooms, only: [:index, :show]
 end
