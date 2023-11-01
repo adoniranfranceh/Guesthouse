@@ -7,13 +7,17 @@
 <li><strong>Área do Quarto:</strong> <%= @room.dimension %>m²</li>
 <li><strong>Capacidade Máxima:</strong> <%= @room.max_occupancy %> pessoas</li>
 <li><strong>Diária Padrão:</strong> <%= number_to_currency(@room.daily_rate, unit: 'R$', separator: ',', delimiter: '.') %></li>
-<li><%= Room.human_attribute_name('private_bathroom') if @room.private_bathroom %></li>
-<li><%= Room.human_attribute_name('balcony') if @room.balcony  %></li>
-<li><%= Room.human_attribute_name('air_conditioning') if @room.air_conditioning  %></li>
-<li><%= Room.human_attribute_name('tv') if @room.tv  %></li>
-<li><%= Room.human_attribute_name('wardrobe') if @room.wardrobe %></li>
-<li><%= Room.human_attribute_name('safe_available') if @room.safe_available  %></li>
-<li><%= Room.human_attribute_name('accessible_for_disabled') if @room.accessible_for_disabled   %></li>
+<li><%= Room.human_attribute_name('private_bathroom') if @room.private_bathroom.nil? %></li>
+<li><%= Room.human_attribute_name('balcony') if @room.balcony.nil? %></li>
+<li><%= Room.human_attribute_name('air_conditioning') if @room.air_conditioning.nil?  %></li>
+<li><%= Room.human_attribute_name('tv') if @room.tv.nil?  %></li>
+<li><%= Room.human_attribute_name('wardrobe') if @room.wardrobe.nil? %></li>
+<li><%= Room.human_attribute_name('safe_available') if @room.safe_available.nil? %></li>
+<li><%= Room.human_attribute_name('accessible_for_disabled') if @room.accessible_for_disabled.nil?   %></li>
 </ul>
 
 <p>Para reservas: <%= @room.for_reservations.to_s.humanize %></p>
+
+<% if @room.inn.admin == current_admin %>
+  <%= link_to 'Editar', edit_inn_room_path(inn_id: @room.inn.id) %>
+<% end %>

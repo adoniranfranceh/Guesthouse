@@ -9,6 +9,14 @@
 </div>
 
 <div>
+  <h3>Quartos de <%= @inn.brand_name %></h3>
+
+  <div>
+    <%= link_to 'Adicionar novo quarto', new_inn_room_path(inn_id: @inn.id) %>
+  </div>
+</div>
+
+<div>
   <%= link_to 'Editar', edit_inn_path(@inn.id) %>
 </div>
 

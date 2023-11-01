@@ -1,0 +1,53 @@
+<%= form_with(model: [@inn, @room]) do |f| %>
+ <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :dimension %>
+    <%= f.number_field :dimension %>
+  </div>
+  <div>
+    <%= f.label :max_occupancy %>
+    <%= f.number_field :max_occupancy %>
+  </div>
+  <div>
+    <%= f.label :daily_rate %>
+    <%= f.number_field :daily_rate %>
+  </div>
+  <div>
+  	<div>
+      <%= f.label :private_bathroom %>
+      <%= f.check_box :private_bathroom, {}, true, false %>
+    </div>
+    <div>
+      <%= f.label :balcony %>
+      <%= f.check_box :balcony, {}, true, false %>
+    </div>
+    <div>
+      <%= f.label :air_conditioning %>
+      <%= f.check_box :air_conditioning, {}, true, false %>
+    </div>
+    <div>
+      <%= f.label :tv %>
+      <%= f.check_box :tv, {}, true, false %>
+    </div>
+    <div>
+      <%= f.label :wardrobe %>
+      <%= f.check_box :wardrobe, {}, true, false %>
+    </div>
+    <div>
+    <%= f.label :safe_available %>
+    <%= f.check_box :safe_available, {}, true, false %>
+      </div>
+    <div>
+      <%= f.label :accessible_for_disabled %>
+      <%= f.check_box :accessible_for_disabled, {}, true, false %>
+    </div>
+  </div>
+  <%= f.submit 'Salvar' %>
+<% end %>

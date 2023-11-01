@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Visitante vê detalhes de um quarto' do
   it 'a partir da tela inicial com todos os campos preenchidos' do
-  	 # Arrange
+    # Arrange
     admin = Admin.create!(name: 'Admin', email: 'admin@admin.com', password: 'password')
     guesthouse = Inn.create!(admin: admin, brand_name: 'Pousada Árvore da Coruja', corporate_name: 'Pousada Guest LTDA',
                                     registration_number: '24469244000186', phone: '(99)91234-1234', email: 'arvore@email.com.br',

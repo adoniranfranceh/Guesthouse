@@ -2,6 +2,7 @@ class InnsController < ApplicationController
 	before_action :authenticate_admin!, only: [:new, :create]
   before_action :set_inn_and_check_admin, only: [:edit, :update, :active, :inactive, :admin_show]
   before_action :check_admin_inn, only: [:new, :create]
+  before_action :set_inn_rooms, only: [:show, :admin_show]
   def show
     @inn = Inn.find(params[:id])
   end
@@ -43,6 +44,11 @@ class InnsController < ApplicationController
   end
 
   private
+
+  def set_inn_rooms
+    @inn = Inn.find(params[:id])
+    @rooms = @inn.rooms
+  end
 
   def check_admin_inn
     return redirect_to root_path if current_admin.inn.present?

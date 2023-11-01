@@ -1,0 +1,11 @@
+<h1>Novo Quarto</h1>
+
+<% if @room.errors.any? %>
+  <% @room.errors.full_messages.each do |message| %>
+    <ul>
+      <li><%= message %></li>
+    </ul>
+  <% end %>
+<% end %>
+
+<%= render 'form' %>

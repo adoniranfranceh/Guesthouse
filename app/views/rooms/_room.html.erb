@@ -1,0 +1,10 @@
+<% if @rooms.any? %>
+  <% @rooms.each do |room| %>
+    <h3><%= link_to room.title, inn_room_path(id: room.id, inn_id: room.inn.id) %></h3>
+    <p>Área do Quarto: <%= room.dimension %>m²</p>
+    <p><%= room.description %></p>
+    <p>Ocupação Máxima: <%= room.max_occupancy %></p>
+  <% end %>
+<% else %>
+  <p>Não há quartos disponíveis</p>
+<% end %>
