@@ -1,6 +1,6 @@
 class InnsController < ApplicationController
 	before_action :authenticate_admin!, only: [:new, :create]
-  before_action :set_inn_and_check_admin, only: [:edit, :update, :active, :inactive]
+  before_action :set_inn_and_check_admin, only: [:edit, :update, :active, :inactive, :admin_show]
   before_action :check_admin_inn, only: [:new, :create]
   def show
     @inn = Inn.find(params[:id])
@@ -29,6 +29,8 @@ class InnsController < ApplicationController
     flash.now[:notice] = 'Pousada não atualizada'
     render :edit
   end
+
+  def admin_show; end
 
   def active
     @inn.active!

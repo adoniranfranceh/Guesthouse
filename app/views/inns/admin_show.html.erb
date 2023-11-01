@@ -1,0 +1,17 @@
+<%= render 'inn' %>
+
+<div>
+  <% if @inn.inactive? %>
+    <%= button_to 'Tornar Ativa', active_inn_path(@inn.id) %>
+  <%  else %>
+    <%= button_to 'Tornar Inativa', inactive_inn_path(@inn.id) %>
+  <% end %>
+</div>
+
+<div>
+  <%= link_to 'Editar', edit_inn_path(@inn.id) %>
+</div>
+
+<div>
+  <%= link_to 'Voltar', root_path %>
+</div>
