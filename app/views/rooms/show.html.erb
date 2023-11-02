@@ -6,7 +6,7 @@
 <ul>
 <li><strong>Área do Quarto:</strong> <%= @room.dimension %>m²</li>
 <li><strong>Capacidade Máxima:</strong> <%= @room.max_occupancy %> pessoas</li>
-<li><strong>Diária Padrão:</strong> <%= R$ @room.daily_rate %>,00</li>
+<li><strong>Diária Padrão:</strong> R$ <%= @room.daily_rate %>,00</li>
 <li><%= Room.human_attribute_name('private_bathroom') if @room.private_bathroom? %></li>
 <li><%= Room.human_attribute_name('balcony') if @room.balcony? %></li>
 <li><%= Room.human_attribute_name('air_conditioning') if @room.air_conditioning?  %></li>
@@ -35,10 +35,16 @@
   <div>
     <h3></h3>
     <% @price_customizations.each do |price_customization| %>
-      <p>
-        De <%= l(price_customization.start_date) %> a <%= l(price_customization.end_date) %>,
-        a partir de <%= price_customization.daily_rate %>
-      </p>
+      <div>
+        <%= link_to edit_inn_room_price_customization_path(inn_id: @room.inn.id,
+                                                          room_id: @room.id,
+                                                          id: price_customization.id) do %>
+          <p>
+            De <%= l(price_customization.start_date) %> a <%= l(price_customization.end_date) %>,
+            a partir de <%= price_customization.daily_rate %>
+          </p>
+        <% end %>
+      </div>
     <% end %>
     <%= link_to 'Adicionar personalização preço', new_inn_room_price_customization_path(inn_id: @room.inn.id , room_id: @room.id) %>
   </div>

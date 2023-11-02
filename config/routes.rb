@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root "home#index"
   resources :inns, only: [:show, :new, :create, :edit, :update] do
     resources :rooms, only: [:show, :new, :create, :edit, :update] do
-      resources :price_customizations, only: [:new, :create]
+      resources :price_customizations, only: [:new, :create, :edit, :update]
       post :available, on: :member
       post :unavailable, on: :member
     end

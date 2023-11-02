@@ -1,0 +1,15 @@
+<%= form_with(model: [@inn, @room, @price_customization]) do |f| %>
+  <div>
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+  </div>
+   <div>
+    <%= f.label :end_date %>
+    <%= f.date_field :end_date %>
+  </div>
+  <div>
+    <%= f.label :daily_rate %>
+    <%= f.number_field :daily_rate %>
+  </div>
+  <%= f.submit 'Salvar' %>
+<% end %>
