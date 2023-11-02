@@ -1,8 +1,6 @@
 class PriceCustomization < ApplicationRecord
   belongs_to :room
-
   validates :start_date, :end_date, :daily_rate, presence: true
-
   validate :no_date_overlap, :date_end_is_later
 
   private

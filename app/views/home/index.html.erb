@@ -1,10 +1,16 @@
-<h1>Pousadas</h1>
+<h1 class="display-4">Pousadas</h1>
+
 <% if @inns.any? %>
-  <% @inns.each do |inn| %>
-    <h3><%= link_to inn.brand_name, inn %></h3>
-    <p><%= inn.city %></p>
-    <p><%= inn.description %></p>
-  <% end %>
+  <div class="list-group">
+    <% @inns.each do |inn| %>
+      <%= link_to inn, class: 'list-group-item list-group-item-action' do %>
+        <h3 class="mb-0"><%= inn.brand_name %></h3>
+        <p class="mb-1"><%= inn.city %></p>
+        <p class="mb-1"><%= inn.description %></p>
+      </a>
+      <% end %>
+    <% end %>
+  </div>
 <% else %>
-  <p>Não existem pousadas cadastradas</p>
+  <p class="alert alert-info">Não existem pousadas cadastradas</p>
 <% end %>

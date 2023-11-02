@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Guesthouse</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,16 +11,32 @@
   </head>
 
   <body>
-    <nav>
-      <%= link_to 'Home', root_path %> | 
-      <%= link_to 'Quartos Disponíveis', rooms_path %>
-      <%= dynamic_link_inn %>
-      <% if admin_signed_in? %>
-        <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
-      <% end %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <%= link_to 'Home', root_path, class: "navbar-brand" %>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <%= link_to 'Quartos Disponíveis', rooms_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= dynamic_link_inn %>
+            </li>
+            <% if admin_signed_in? %>
+              <li class="nav-item">
+                <%= button_to 'Sair', destroy_admin_session_path, method: :delete, class: "btn btn-danger" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </nav>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container mt-4">
+      <% if notice alert %>
+          <p class="notice alert alert-success"><%= notice %></p>
+          <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>
