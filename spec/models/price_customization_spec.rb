@@ -42,7 +42,7 @@ RSpec.describe PriceCustomization, type: :model do
       PriceCustomization.create(room: room, start_date: '2023-12-1', end_date: '2024-02-29', daily_rate: 400,
                                 season: :low_season, season_name: 'Semana de Inverno')
       price_customization = PriceCustomization.new(room: room, start_date: '2023-11-10', end_date: '2023-11-30', daily_rate: 200,
-                                                  season: :low_season, season_name:  de Menor Tráfego')
+                                                  season: :low_season, season_name: 'Semana de Menor Tráfego')
       price_customization.valid?
       expect(price_customization.valid?).to be true
     end
@@ -64,7 +64,7 @@ RSpec.describe PriceCustomization, type: :model do
                   daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true,
                   tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
       price_customization = PriceCustomization.new(room: room, start_date: '2023-12-10', end_date: '2023-11-30', daily_rate: 200,
-                                                  season: :low_season, season_name:  de Menor Tráfego')
+                                                  season: :low_season, season_name: 'Semana de Menor Tráfego')
       price_customization.valid?
       expect(price_customization.valid?).to be false
     end
@@ -86,7 +86,7 @@ RSpec.describe PriceCustomization, type: :model do
                   daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true,
                   tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
       price_customization = PriceCustomization.new(room: room, start_date: '', end_date: '2023-11-30', daily_rate: 200,
-                                                  season: :low_season, season_name:  de Menor Tráfego')
+                                                  season: :low_season, season_name: 'Semana de Menor Tráfego')
       price_customization.valid?
       expect(price_customization.valid?).to be false
     end
@@ -106,7 +106,7 @@ RSpec.describe PriceCustomization, type: :model do
                   daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true,
                   tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
       price_customization = PriceCustomization.new(room: room, start_date: '2023-11-10', end_date: '', daily_rate: 200,
-                                                  season: :low_season, season_name:  de Menor Tráfego')
+                                                  season: :low_season, season_name: 'Semana de Menor Tráfego')
       price_customization.valid?
       expect(price_customization.valid?).to be false
     end
