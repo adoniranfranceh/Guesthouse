@@ -47,7 +47,11 @@ class InnsController < ApplicationController
 
   def set_inn_rooms
     @inn = Inn.find(params[:id])
-    @rooms = @inn.rooms
+    if @inn.admin != current_admin
+      @rooms = Room.available
+    else
+      @rooms = @inn.rooms
+    end
   end
 
   def check_admin_inn

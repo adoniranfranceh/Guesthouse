@@ -32,7 +32,6 @@ describe 'Administrador registra um quarto' do
 
     # Assert
     expect(page).to have_content('Chalé de 1 Quarto')
-    expect(page).to have_content('Chalé de 1 Quarto')
     expect(page).to have_content('Área do Quarto: 40m²')
     expect(page).to have_content('Camas confortáveis')
     expect(page).to have_content('Ocupação Máxima: 4')

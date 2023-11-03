@@ -1,5 +1,5 @@
 class PriceCustomizationsController < ApplicationController
-  before_action :set_inn_and_room, only: [:new, :create, :edit, :update]
+  before_action :set_inn_room_and_check_admin, only: [:new, :create, :edit, :update]
   def new
   	@price_customization = PriceCustomization.new
   end
@@ -29,14 +29,17 @@ class PriceCustomizationsController < ApplicationController
 
   private
 
+  def set_inn_room_and_check_admin
+    @inn = Inn.find(params[:inn_id])
+    @room = Room.find(params[:room_id])
+    if @inn.admin != current_admin
+      redirect_to root_path, notice: 'Não é possível concluir a ação sem estar logado'
+    end
+  end
+
   def price_customization_params
     price_customization_params = params.require(:price_customization).permit(:start_date,
                                                                             :end_date,
                                                                             :daily_rate)
-  end
-
-  def set_inn_and_room
-    @inn = Inn.find(params[:inn_id])
-    @room = Room.find(params[:room_id])
   end
 end

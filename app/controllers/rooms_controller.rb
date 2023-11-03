@@ -8,6 +8,9 @@ class RoomsController < ApplicationController
   def show
     @inn = Inn.find(params[:id])
     @price_customizations = @room.price_customizations
+    if @inn.admin != current_admin && @room.unavailable?
+      redirect_to root_path, notice: "Quarto #{@room.title} está desabilitado para reservas"
+    end
   end
 
   def new
