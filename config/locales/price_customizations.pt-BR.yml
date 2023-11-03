@@ -1,9 +1,19 @@
 pt-BR:
+  high_season: 'Alta Temporada'
+  low_season: 'Baixa Temporada'
   activerecord:
     models:
-      price_customization: Preço Customizado
+      price_customization:
+        one: 'Preço Customizado'
+        other: 'Preços Customizados'
     attributes:
       price_customization:
+        season_name: 'Nome da Temporada'
+        season: 'Temporada'
         start_date: 'Data Início'
         end_date: 'Data Final'
         daily_rate: 'Diária Personalizada'
+        season: 'Tipo de Temporada'
+        season_name: 'Nome da Temporada'
+        season_high_season: 'Alta Temporada'
+        season_low_season: 'Baixa Temporada'

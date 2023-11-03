@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_01_165558) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_03_035907) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -55,6 +55,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_01_165558) do
     t.integer "daily_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "season"
+    t.string "season_name"
     t.index ["room_id"], name: "index_price_customizations_on_room_id"
   end
 

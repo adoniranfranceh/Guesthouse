@@ -38,7 +38,9 @@ class PriceCustomizationsController < ApplicationController
   end
 
   def price_customization_params
-    price_customization_params = params.require(:price_customization).permit(:start_date,
+    price_customization_params = params.require(:price_customization).permit(:season,
+                                                                            :season_name,
+                                                                            :start_date,
                                                                             :end_date,
                                                                             :daily_rate)
   end

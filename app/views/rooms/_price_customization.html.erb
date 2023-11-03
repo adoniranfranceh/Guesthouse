@@ -1,0 +1,8 @@
+<% if room.current_price_customization %>
+  <p>
+    <%= t(room.current_price_customization.season) %> de 
+    <%= room.current_price_customization.season_name %>
+  </p>
+<% end %>
+
+<p>A partir de R$ <%= room.current_daily_rate %>,00</p> 

@@ -49,11 +49,10 @@
     <%= f.text_field :payment_methods %>
   </div>
   <div>
-  <%= f.label :accepts_pets %>
-    <%= f.radio_button :accepts_pets, true, id: 'accepts_pets_true' %>
-    <%= label_tag 'accepts_pets_true', t('activerecord.boolean.accepts_pets.true') %>
-    <%= f.radio_button :accepts_pets, false, id: 'accepts_pets_false' %>
-    <%= label_tag 'accepts_pets_false', t('activerecord.boolean.accepts_pets.false') %>
+    <%= f.radio_button :accepts_pets, true %>
+    <%= f.label :accepts_pets_true%>
+    <%= f.radio_button :accepts_pets, false %>
+    <%= f.label :accepts_pets_false %>
   </div>
   <div>
     <%= f.label :usage_policies %>

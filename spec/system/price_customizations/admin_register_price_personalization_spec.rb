@@ -42,12 +42,15 @@ describe 'Administrador registra preço personalizado para quarto' do
     login_as(admin, scope: :admin)
     visit inn_room_path(inn_id: guesthouse.id, id: room.id)
     click_on('Adicionar personalização preço')
-    fill_in 'Data Início', with: '2023-12-1'
+    fill_in 'Nome da Temporada', with: 'Fim de Ano'
+    choose 'Alta Temporada'
+    fill_in 'Data Início', with: '2023-09-11'
     fill_in 'Data Final', with: '2024-02-29'
     fill_in 'Diária Personalizada', with: '400'
     click_on('Salvar')
     # Assert
     expect(page).to have_content('Preço customizado registrado com sucesso')
-    expect(page).to have_content('De 01/12/2023 a 29/02/2024, a partir de 400')
+    expect(page).to have_content('De 11/09/2023 a 29/02/2024, a partir de 400')
+    expect(page).to have_content 'Alta Temporada de Fim de Ano'
   end
 end

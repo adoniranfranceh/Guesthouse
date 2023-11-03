@@ -2,6 +2,7 @@ class PriceCustomization < ApplicationRecord
   belongs_to :room
   validates :start_date, :end_date, :daily_rate, presence: true
   validate :no_date_overlap, :date_end_is_later
+  enum season: { high_season: 0, low_season: 5 }
 
   private
 
@@ -10,7 +11,6 @@ class PriceCustomization < ApplicationRecord
       errors.add(:end_date, 'não pode ser anterior ou igual à data de início')
     end
   end
-
 
   def no_date_overlap
     return nil unless room.present?

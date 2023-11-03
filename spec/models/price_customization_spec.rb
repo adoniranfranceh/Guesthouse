@@ -17,7 +17,8 @@ RSpec.describe PriceCustomization, type: :model do
                   daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true,
                   tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
       PriceCustomization.create!(room: room, start_date: '2023-12-1', end_date: '2024-02-29', daily_rate: 400)
-      price_customization = PriceCustomization.new(room: room, start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200)
+      price_customization = PriceCustomization.new(room: room, season_name: 'Fim de Ano', start_date: '2023-11-10', end_date: '2023-12-30',
+                                                   daily_rate: 200, season: :high_season)
 
       expect(price_customization.valid?).to be_falsey
       expect(price_customization.errors.full_messages).to include('O intervalo de datas não pode se sobrepor a outros preços personalizados.')

@@ -15,12 +15,12 @@ describe 'Administrador edita preço personalizado para quarto' do
     room = Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40,
                         max_occupancy: 4, daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
                         tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-    price_customization = PriceCustomization.create!(room: room, start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200)
+    price_customization = PriceCustomization.create!(room: room, season_name: 'Fim de Ano', start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200)
 
     # Act
     login_as(admin, scope: :admin)
     visit inn_room_path(inn_id: guesthouse.id, id: room.id)
-    click_on('De 10/11/2023 a 30/12/2023, a partir de 200')
+    click_on('Fim de Ano')
 
     # Assert
     expect(page).to have_content('Editar Preço Customizado')
@@ -43,12 +43,12 @@ describe 'Administrador edita preço personalizado para quarto' do
     room = Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40,
                         max_occupancy: 4, daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
                         tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-    price_customization = PriceCustomization.create!(room: room, start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200)
+    price_customization = PriceCustomization.create!(room: room, season_name: 'Fim de Ano', start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200)
 
     # Act
     login_as(admin, scope: :admin)
     visit inn_room_path(inn_id: guesthouse.id, id: room.id)
-    click_on('De 10/11/2023 a 30/12/2023, a partir de 200')
+    click_on('Fim de Ano')
     fill_in('Data Início', with: '2023-11-15')
     click_on('Salvar')
 

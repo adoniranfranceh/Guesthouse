@@ -1,5 +1,16 @@
 <%= form_with(model: [@inn, @room, @price_customization]) do |f| %>
   <div>
+    <%= f.label :season_name %>
+    <%= f.text_field :season_name %>
+  </div>
+  <div>
+    <%= f.radio_button :season, 'high_season' %>
+    <%= f.label :season_high_season  %>
+
+    <%= f.radio_button :season, 'low_season' %>
+    <%= f.label :season_low_season %>
+  </div>
+  <div>
     <%= f.label :start_date %>
     <%= f.date_field :start_date %>
   </div>

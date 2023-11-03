@@ -20,7 +20,7 @@
     <dt><%= Inn.human_attribute_name('check_out') %>:</dt>
     <dd><%= @inn.check_out.strftime('%H:%M') %></dd>
     <dt><%= Inn.human_attribute_name('accepts_pets') %>:</dt>
-    <dd><%= t("activerecord.boolean.accepts_pets.#{@inn.accepts_pets?}") %></dd>
+    <dd><%= Inn.human_attribute_name("accepts_pets_#{@inn.accepts_pets?}") %></dd>
   </dl>
 </div>
 
@@ -30,5 +30,7 @@
   <dt><%= Inn.human_attribute_name('phone') %>:</dt>
   <dd><%= @inn.phone %></dd>
 </div>
+
+<h3>Quartos da <%= @inn.brand_name %></h3>
 
 <%= render 'rooms/room' %>

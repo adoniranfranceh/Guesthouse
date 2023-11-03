@@ -17,7 +17,7 @@
 </ul>
 
 <p><%= t(@room.for_reservations) %> para reservas</p>
-
+<%= render partial: 'rooms/price_customization', locals: { room: @room } %>
 
 <% if @room.inn.admin == current_admin %>
   <%= link_to 'Editar', edit_inn_room_path(inn_id: @room.inn.id) %>
@@ -33,17 +33,20 @@
   </div>
 
   <div>
-    <h3></h3>
+    <h3><%= PriceCustomization.model_name.human(count: @room.price_customizations.count) %></h3>
     <% @price_customizations.each do |price_customization| %>
       <div>
         <%= link_to edit_inn_room_price_customization_path(inn_id: @room.inn.id,
                                                           room_id: @room.id,
                                                           id: price_customization.id) do %>
           <p>
-            De <%= l(price_customization.start_date) %> a <%= l(price_customization.end_date) %>,
-            a partir de <%= price_customization.daily_rate %>
+            <%= price_customization.season_name %>
           </p>
         <% end %>
+        <p>
+          De <%= l(price_customization.start_date) %> a <%= l(price_customization.end_date) %>,
+          a partir de <%= price_customization.daily_rate %>
+        </p>
       </div>
     <% end %>
     <%= link_to 'Adicionar personalização preço', new_inn_room_price_customization_path(inn_id: @room.inn.id , room_id: @room.id) %>

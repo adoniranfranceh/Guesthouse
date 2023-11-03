@@ -20,7 +20,7 @@ pt-BR:
         usage_policies: 'Políticas de Uso'
         check_in: 'Check in'
         check_out: 'Check out'
-    boolean:
-      accepts_pets:
+        accepts_pets_true: 'Aceita'
+        accepts_pets_false: 'Não aceita'
         true: 'Aceita'
         false: 'Não aceita'
