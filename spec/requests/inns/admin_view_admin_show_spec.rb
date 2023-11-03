@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Administrador vê acessa detalhes de sua pousada' do
-  it 'mas já possui uma' do
+describe 'Administrador vê detalhes de uma pousada' do
+  it 'e não é dono' do
     # Arrange
     admin = Admin.create!(name: 'Jorge', email: 'admin@email.com', password: 'password')
     other_admin = Admin.create!(name: 'Jorge', email: 'jorge@email.com', password: 'password')
