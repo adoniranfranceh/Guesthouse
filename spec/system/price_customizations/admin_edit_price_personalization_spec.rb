@@ -15,7 +15,8 @@ describe 'Administrador edita preço personalizado para quarto' do
     room = Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40,
                         max_occupancy: 4, daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
                         tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-    price_customization = PriceCustomization.create!(room: room, season_name: 'Fim de Ano', start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200)
+    price_customization = PriceCustomization.create!(room: room, season_name: 'Fim de Ano', start_date: '2023-11-10',
+                                                    end_date: '2023-12-30', daily_rate: 200, season: :low_season)
 
     # Act
     login_as(admin, scope: :admin)
@@ -25,6 +26,8 @@ describe 'Administrador edita preço personalizado para quarto' do
     # Assert
     expect(page).to have_content('Editar Preço Customizado')
     expect(page).to have_field('Data Início', with: '2023-11-10')
+    expect(page).to have_field('Nome da Temporada', with: 'Fim de Ano')
+    expect(page).to have_checked_field('Baixa Temporada')
     expect(page).to have_field('Data Final', with: '2023-12-30')
     expect(page).to have_field('Diária Personalizada', with: '200')
   end
@@ -43,7 +46,8 @@ describe 'Administrador edita preço personalizado para quarto' do
     room = Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40,
                         max_occupancy: 4, daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
                         tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-    price_customization = PriceCustomization.create!(room: room, season_name: 'Fim de Ano', start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200)
+    price_customization = PriceCustomization.create!(room: room, season_name: 'Fim de Ano', start_date: '2023-11-10',
+                                                    end_date: '2023-12-30', daily_rate: 200, season: :low_season)
 
     # Act
     login_as(admin, scope: :admin)

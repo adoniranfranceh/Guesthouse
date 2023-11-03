@@ -1,8 +1,23 @@
 class PriceCustomization < ApplicationRecord
   belongs_to :room
-  validates :start_date, :end_date, :daily_rate, presence: true
-  validate :no_date_overlap, :date_end_is_later
+  validates :season_name, :season, :start_date, :end_date, :daily_rate, presence: true
+  validates :season_name, uniqueness: true
+  validate :no_date_overlap, :date_end_is_later, :validate_daily_rate_for_high_season,
+           :validate_daily_rate_for_low_season
   enum season: { high_season: 0, low_season: 5 }
+
+  def validate_daily_rate_for_high_season
+    if high_season? && daily_rate < room.daily_rate
+      self.errors.add(:daily_rate, "só pode ser menor que à Diária Padrão durante se for Temporada Baixa")
+    end
+  end
+
+
+  def validate_daily_rate_for_low_season
+    if self.low_season? && self.daily_rate > room.daily_rate
+      self.errors.add(:daily_rate, "só pode ser maior que à Diária Padrão se for Temporada Alta")
+    end
+  end
 
   private
 

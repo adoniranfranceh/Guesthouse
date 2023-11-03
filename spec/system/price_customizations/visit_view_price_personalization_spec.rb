@@ -16,8 +16,9 @@ describe 'Visitante vê preço customizado' do
     room = Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40,
                         max_occupancy: 4, daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
                         tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-    price_customization = PriceCustomization.create!(room: room, season_name: 'Fim de Ano' ,start_date: Date.today,
-                                                    end_date: 1.week.from_now, daily_rate: 400, season: :high_season)
+    price_customization = PriceCustomization.create!(room: room,start_date: Date.today,
+                                                    end_date: 1.week.from_now, daily_rate: 400,
+                                                    season: :high_season, season_name: 'Fim de Ano')
     # Act
     visit root_path
     click_on('Quartos Disponíveis')

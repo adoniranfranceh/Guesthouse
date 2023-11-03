@@ -17,7 +17,8 @@ describe 'Administrador edita preço customizado' do
       room = Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40,
                           max_occupancy: 4, daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
                           tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-      price_customization = PriceCustomization.create!(room: room, start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200)
+      price_customization = PriceCustomization.create!(room: room, start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200,
+                                                      season: :low_season, season_name: 'Inverno')
       # Act
       login_as(other_admin, scope: :admin)
       get(edit_inn_room_price_customization_path(inn_id: guesthouse.id,
@@ -44,7 +45,8 @@ describe 'Administrador edita preço customizado' do
       room = Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40,
                           max_occupancy: 4, daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
                           tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-      price_customization = PriceCustomization.create!(room: room, start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200)
+      price_customization = PriceCustomization.create!(room: room, start_date: '2023-11-10', end_date: '2023-12-30', daily_rate: 200,
+                                                      season: :low_season, season_name: 'Inverno')
       # Act
       login_as(other_admin, scope: :admin)
       patch(inn_room_price_customization_path(inn_id: guesthouse.id,
