@@ -1,4 +1,4 @@
-<% if @rooms.any? %>
+<% if rooms.any? %>
   <% @rooms.each do |room| %>
     <h3><%= link_to room.title, inn_room_path(id: room.id, inn_id: room.inn.id) %></h3>
     <p>Área do Quarto: <%= room.dimension %>m²</p>

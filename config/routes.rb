@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins
   root "home#index"
+  get 'city/:city' => 'inns#by_city', as: 'by_city'
   resources :inns, only: [:show, :new, :create, :edit, :update] do
     resources :rooms, only: [:show, :new, :create, :edit, :update] do
       resources :price_customizations, only: [:new, :create, :edit, :update]

@@ -1,10 +1,11 @@
 class InnsController < ApplicationController
-	before_action :authenticate_admin!, only: [:new, :create]
+	before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
   before_action :set_inn_and_check_admin, only: [:edit, :update, :active, :inactive, :admin_show]
   before_action :check_admin_inn, only: [:new, :create]
   before_action :set_inn_rooms, only: [:show, :admin_show]
   def show
     @inn = Inn.find(params[:id])
+    @rooms = @inn.rooms.available
   end
 
   def new
@@ -32,6 +33,11 @@ class InnsController < ApplicationController
   end
 
   def admin_show; end
+
+  def by_city
+    @city = params[:city]
+    @inns = Inn.where(city: @city).order(:brand_name)
+  end
 
   def active
     @inn.active!
