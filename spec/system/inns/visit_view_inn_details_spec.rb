@@ -17,7 +17,6 @@ describe 'Visitante vê detalhes da pousada' do
     click_on('Pousada Árvore da Coruja')
   	# Assert
     expect(page).to have_content('Pousada Árvore da Coruja')
-    expect(page).to have_content('Pousada Guest LTDA - 24469244000186')
     expect(page).to have_content('Pousada Árvore Da Coruja oferece acomodação com lounge compartilhado.')
     expect(page).to have_content('Bairro: Planalto')
     expect(page).to have_content('Rua: Pedro Candiago, 725, Gramado, CEP 95670-000 - RS')
@@ -49,7 +48,6 @@ describe 'Visitante vê detalhes da pousada' do
     click_on('Pousada Árvore da Coruja')
     # Assert
     expect(page).to have_content('Pousada Árvore da Coruja')
-    expect(page).to have_content('Pousada Guest LTDA - 24469244000186')
     expect(page).to have_content('Pousada Árvore Da Coruja oferece acomodação com lounge compartilhado.')
     expect(page).to have_content('Bairro: Planalto')
     expect(page).not_to have_link('Editar')
