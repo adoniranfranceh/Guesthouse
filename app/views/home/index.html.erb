@@ -1,27 +1,29 @@
-  <h1 class="display-4">Pousadas</h1>
+<h1 class="display-4">Pousadas</h1>
 
-  <% if @inns.any? %>
-    <div class="list-group">
-      <div id="recent_inns">
-        <h2>Pousadas Recentes</h2>
-        <% @recent_inns.each do |inn| %>
-          <%= link_to inn, class: 'list-group-item list-group-item-action' do %>
-            <h3 class="mb-0"><%= inn.brand_name %></h3>
-            <p class="mb-1"><%= inn.city %></p>
-          <% end %>
+<% if @inns.any? %>
+  <div id="choose_city">
+    <% if @cities.present? %>
+      <% @cities.each do |city| %>
+        <%= link_to city, by_city_path(city) %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="list-group">
+    <div id="recent_inns">
+      <h2>Pousadas Recentes</h2>
+      <% @recent_inns.each do |inn| %>
+        <%= link_to inn, class: 'list-group-item list-group-item-action' do %>
+          <h3 class="mb-0"><%= inn.brand_name %></h3>
+          <p class="mb-1"><%= inn.city %></p>
         <% end %>
-      </div>
-
-      <hr>
-      <div id="rest_of_the_inns">
-        <% @rest_of_the_inns.each do |inn| %>
-          <%= link_to inn, class: 'list-group-item list-group-item-action' do %>
-            <h3 class="mb-0"><%= inn.brand_name %></h3>
-            <p class="mb-1"><%= inn.city %></p>
-          <% end %>
-        <% end %>
-      </div>
+      <% end %>
     </div>
-  <% else %>
-    <p class="alert alert-info">Não existem pousadas cadastradas</p>
-  <% end %>
+
+    <hr>
+    <div id="rest_of_the_inns">
+      <%= render partial: 'shared/inns', locals: { inns: @rest_of_the_inns } %>
+    </div>
+  </div>
+<% else %>
+  <p class="alert alert-info">Não existem pousadas cadastradas</p>
+<% end %>

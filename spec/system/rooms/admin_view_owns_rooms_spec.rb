@@ -13,7 +13,7 @@ describe 'Administrador vê seus próprios quartos' do
                                     payment_methods: 'Crédito e Débito', accepts_pets: true,
                                     usage_policies: 'Não é permitido fumar', check_in: '15:00', check_out: '14:00', status: :active)
     
-    other_guesthouse = Inn.new(admin: other_admin, brand_name: 'Pousada Nascer do Sol', corporate_name: 'Sun LTDA',
+    other_guesthouse = Inn.create!(admin: other_admin, brand_name: 'Pousada Nascer do Sol', corporate_name: 'Sun LTDA',
                               registration_number: '65560651000181', phone: '(99)91235-1234', email: 'sun@email.com.br',
                               address: 'Rua do Norte, 100', neighborhood: 'Lago Negro', state: 'RS',
                               city: 'Gramado', zip_code: ' 95670-000',
