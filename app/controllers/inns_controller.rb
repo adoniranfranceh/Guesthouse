@@ -34,6 +34,11 @@ class InnsController < ApplicationController
 
   def admin_show; end
 
+  def search
+    @term = params[:query]
+    @inns = Inn.search_for_inns(@term)
+  end
+
   def by_city
     @city = params[:city]
     @inns = Inn.where(city: @city).order(:brand_name)

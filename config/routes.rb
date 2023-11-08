@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "home#index"
   get 'city/:city' => 'inns#by_city', as: 'by_city'
   resources :inns, only: [:show, :new, :create, :edit, :update] do
+    get :search, on: :collection
     resources :rooms, only: [:show, :new, :create, :edit, :update] do
       resources :price_customizations, only: [:new, :create, :edit, :update]
       post :available, on: :member
