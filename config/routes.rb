@@ -14,4 +14,7 @@ Rails.application.routes.draw do
     get :admin_show, on: :member
   end
   resources :rooms, only: [:index]
+  resources :advanced_searches, only: [:index] do
+    get :search, on: :collection
+  end
 end

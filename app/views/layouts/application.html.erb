@@ -20,6 +20,9 @@
               <%= link_to 'Quartos Disponíveis', rooms_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
+              <%= link_to 'Busca Avançada', advanced_searches_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
               <%= dynamic_link_inn %>
             </li>
             <% if admin_signed_in? %>

@@ -33,7 +33,7 @@ describe 'Administrador edita um quarto' do
     expect(page).not_to have_checked_field('TV')
     expect(page).to have_checked_field('Guarda-Roupa')
     expect(page).to have_checked_field('Cofre')
-    expect(page).to have_checked_field('Acessível para pessoas com deficiência')
+    expect(page).to have_checked_field('Acessível para PcD')
   end
 
   it 'com sucesso' do

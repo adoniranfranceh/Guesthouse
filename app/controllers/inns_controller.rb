@@ -36,7 +36,7 @@ class InnsController < ApplicationController
 
   def search
     @term = params[:query]
-    @inns = Inn.search_for_inns(@term)
+    @inns = Inn.search_for_inns(@term).order(:brand_name)
   end
 
   def by_city

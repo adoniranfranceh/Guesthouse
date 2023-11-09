@@ -18,4 +18,5 @@ pt-BR:
         tv: 'TV'
         wardrobe: 'Guarda-Roupa'
         safe_available:  'Cofre Disponível'
-        accessible_for_disabled: 'Acessível para pessoas com deficiência'
+        accessible_for_disabled: 'Acessível para PcD'
+        accepts_pets: 'Aceita Pets'

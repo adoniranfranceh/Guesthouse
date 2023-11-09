@@ -1,0 +1,6 @@
+<h2>Busca Avançada</h2>
+<h3>Pousadas Ativas</h3>
+<%= render 'form' %>
+<div class="list-group">
+  <%= render partial: 'shared/inns', locals: { inns: @inns } %>
+</div>
