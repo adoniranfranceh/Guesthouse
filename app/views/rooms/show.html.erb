@@ -4,20 +4,22 @@
 <p><%= @room.description %></p>
 
 <ul>
-<li><strong>Área do Quarto:</strong> <%= @room.dimension %>m²</li>
-<li><strong>Capacidade Máxima:</strong> <%= @room.max_occupancy %> pessoas</li>
-<li><strong>Diária Padrão:</strong> R$ <%= @room.daily_rate %>,00</li>
-<li><%= Room.human_attribute_name('private_bathroom') if @room.private_bathroom? %></li>
-<li><%= Room.human_attribute_name('balcony') if @room.balcony? %></li>
-<li><%= Room.human_attribute_name('air_conditioning') if @room.air_conditioning?  %></li>
-<li><%= Room.human_attribute_name('tv') if @room.tv?  %></li>
-<li><%= Room.human_attribute_name('wardrobe') if @room.wardrobe? %></li>
-<li><%= Room.human_attribute_name('safe_available') if @room.safe_available? %></li>
-<li><%= Room.human_attribute_name('accessible_for_disabled') if @room.accessible_for_disabled?   %></li>
+  <li><strong>Área do Quarto:</strong> <%= @room.dimension %>m²</li>
+  <li><strong>Capacidade Máxima:</strong> <%= @room.max_occupancy %> pessoas</li>
+  <li><strong>Diária Padrão:</strong> R$ <%= @room.daily_rate %>,00</li>
+  <li><%= Room.human_attribute_name('private_bathroom') if @room.private_bathroom? %></li>
+  <li><%= Room.human_attribute_name('balcony') if @room.balcony? %></li>
+  <li><%= Room.human_attribute_name('air_conditioning') if @room.air_conditioning?  %></li>
+  <li><%= Room.human_attribute_name('tv') if @room.tv?  %></li>
+  <li><%= Room.human_attribute_name('wardrobe') if @room.wardrobe? %></li>
+  <li><%= Room.human_attribute_name('safe_available') if @room.safe_available? %></li>
+  <li><%= Room.human_attribute_name('accessible_for_disabled') if @room.accessible_for_disabled?%></li>
 </ul>
 
 <p><%= t(@room.for_reservations) %> para reservas</p>
-<%= render partial: 'rooms/price_customization', locals: { room: @room } %>
+<% if @inn.admin == current_admin %>
+  <%= render partial: 'rooms/price_customization', locals: { room: @room } %>
+<% end %>
 
 <% if @room.inn.admin == current_admin %>
   <%= link_to 'Editar', edit_inn_room_path(inn_id: @room.inn.id) %>
