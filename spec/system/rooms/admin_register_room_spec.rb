@@ -27,7 +27,7 @@ describe 'Administrador registra um quarto' do
     check 'TV'
     check 'Guarda-Roupa'
     check 'Cofre Disponível'
-    check 'Acessível para pessoas com deficiência'
+    check 'Acessível para PcD'
     click_on 'Salvar'
 
     # Assert

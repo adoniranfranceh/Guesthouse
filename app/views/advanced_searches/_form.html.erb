@@ -1,0 +1,11 @@
+<%= form_with(url: search_advanced_searches_path, method: :get) do |form| %>
+  <%= link_to 'Listar todos', advanced_searches_path %>
+  <%= form.button Room.human_attribute_name('accepts_pets'), name: 'accepts_pets', value: true %>
+  <%= form.button Room.human_attribute_name('private_bathroom'), name: 'private_bathroom', value: true %>
+  <%= form.button Room.human_attribute_name('balcony'), name: 'balcony', value: true %>
+  <%= form.button Room.human_attribute_name('air_conditioning'), name: 'air_conditioning', value: true %>
+  <%= form.button Room.human_attribute_name('tv'), name: 'tv', value: true %>
+  <%= form.button Room.human_attribute_name('wardrobe'), name: 'wardrobe', value: true %>
+  <%= form.button Room.human_attribute_name('safe_available'), name: 'safe_available', value: true %>
+  <%= form.button Room.human_attribute_name('accessible_for_disabled'), name: 'accessible_for_disabled', value: true %>
+<% end %>

@@ -4,7 +4,6 @@
     <p>Área do Quarto: <%= room.dimension %>m²</p>
     <p><%= room.description %></p>
     <p>Ocupação Máxima: <%= room.max_occupancy %></p>
-    <%= render partial: 'rooms/price_customization', locals: { room: room } %>
   <% end %>
 <% else %>
   <p>Não há quartos disponíveis</p>

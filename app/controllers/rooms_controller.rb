@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :check_admin, only: [:edit, :update, :new, :create, :available, :unavailable]
   before_action :set_room, only: [:show, :edit, :update, :available, :unavailable]
   def index
-  	@rooms = Room.available
+    @rooms = Room.available
   end
 
   def show

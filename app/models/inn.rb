@@ -11,4 +11,8 @@ class Inn < ApplicationRecord
   def full_description
     "#{self.corporate_name} - #{self.registration_number}"
   end
+
+  scope :search_for_inns, ->(term) do
+    where('neighborhood LIKE ? OR city LIKE ? OR brand_name LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%")
+  end
 end

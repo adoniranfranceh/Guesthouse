@@ -31,7 +31,7 @@ describe 'Visitante vê detalhes de um quarto' do
     expect(page).to have_content('TV')
     expect(page).to have_content('Guarda-Roupa')
     expect(page).to have_content('Cofre Disponível')
-    expect(page).to have_content('Acessível para pessoas com deficiência')
+    expect(page).to have_content('Acessível para PcD')
     expect(page).to have_content('Camas confortáveis')
   end
 
@@ -66,7 +66,7 @@ describe 'Visitante vê detalhes de um quarto' do
     expect(page).to have_content('Guarda-Roupa')
     expect(page).not_to have_content('Ar Condicionado')
     expect(page).not_to have_content('Cofre Disponível')
-    expect(page).to have_content('Acessível para pessoas com deficiência')
+    expect(page).to have_content('Acessível para PcD')
     expect(page).to have_content('Camas confortáveis')
   end
 end
