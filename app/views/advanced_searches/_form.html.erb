@@ -1,11 +1,40 @@
 <%= form_with(url: search_advanced_searches_path, method: :get) do |form| %>
   <%= link_to 'Listar todos', advanced_searches_path %>
-  <%= form.button Room.human_attribute_name('accepts_pets'), name: 'accepts_pets', value: true %>
-  <%= form.button Room.human_attribute_name('private_bathroom'), name: 'private_bathroom', value: true %>
-  <%= form.button Room.human_attribute_name('balcony'), name: 'balcony', value: true %>
-  <%= form.button Room.human_attribute_name('air_conditioning'), name: 'air_conditioning', value: true %>
-  <%= form.button Room.human_attribute_name('tv'), name: 'tv', value: true %>
-  <%= form.button Room.human_attribute_name('wardrobe'), name: 'wardrobe', value: true %>
-  <%= form.button Room.human_attribute_name('safe_available'), name: 'safe_available', value: true %>
-  <%= form.button Room.human_attribute_name('accessible_for_disabled'), name: 'accessible_for_disabled', value: true %>
+  <div>
+    <%= form.label :advanced_query, 'Digite o nome fantasia' %>
+    <%= form.text_field :advanced_query %>
+  </div>
+  <div>
+    <%= form.label :accepts_pets, Room.human_attribute_name('accepts_pets')%>
+    <%= form.check_box :accepts_pets, {}, true, false %>
+  </div>
+  <div>
+    <%= form.label :private_bathroom, Room.human_attribute_name('private_bathroom')%>
+    <%= form.check_box :private_bathroom, {}, true, false %>
+  </div>
+  <div>
+    <%= form.label :balcony, Room.human_attribute_name('balcony')%>
+    <%= form.check_box :balcony, {}, true, false %>
+  </div>
+  <div>
+    <%= form.label :air_conditioning, Room.human_attribute_name('air_conditioning')%>
+    <%= form.check_box :air_conditioning, {}, true, false %>
+  </div>
+  <div>
+    <%= form.label :tv, Room.human_attribute_name('tv')%>
+    <%= form.check_box :tv, {}, true, false %>
+  </div>
+  <div>
+    <%= form.label :wardrobe, Room.human_attribute_name('wardrobe')%>
+    <%= form.check_box :wardrobe, {}, true, false %>
+  </div>
+  <div>
+    <%= form.label :safe_available, Room.human_attribute_name('safe_available')%>
+    <%= form.check_box :safe_available, {}, true, false %>
+  </div>
+  <div>
+    <%= form.label :accessible_for_disabled, Room.human_attribute_name('accessible_for_disabled')%>
+    <%= form.check_box :accessible_for_disabled, {}, true, false %>
+  </div>
+  <%= form.submit 'Buscar' %>
 <% end %>

@@ -1,7 +1,12 @@
-<h2>Busca por <%= Room.human_attribute_name(params.keys.first) %></h2>
-
-<%= render 'form' %>
+<section id="advanced_search_form">
+  <h2>Busca Avançada</h2>
+  <%= render 'form' %>
+</section>
 
 <div class="list-group">
-  <%= render partial: 'shared/inns', locals: { inns: @inns } %>
+  <% if @inns.present? %>
+    <%= render partial: 'shared/inns', locals: { inns: @inns } %>
+  <% else %>
+    <p>Nenhuma pousada encontrada<p>
+  <% end %>
 </div>

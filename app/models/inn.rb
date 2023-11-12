@@ -13,6 +13,6 @@ class Inn < ApplicationRecord
   end
 
   scope :search_for_inns, ->(term) do
-    where('neighborhood LIKE ? OR city LIKE ? OR brand_name LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%")
+    where('inns.neighborhood LIKE ? OR inns.city LIKE ? OR inns.brand_name LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%")
   end
 end
