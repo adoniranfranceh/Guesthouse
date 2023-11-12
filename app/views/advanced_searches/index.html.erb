@@ -1,6 +1,7 @@
-<h2>Busca Avançada</h2>
-<h3>Pousadas Ativas</h3>
-<%= render 'form' %>
+<section id="advanced_search_form">
+  <h2>Busca Avançada</h2>
+  <%= render 'form' %>
+</section>
 <div class="list-group">
   <%= render partial: 'shared/inns', locals: { inns: @inns } %>
 </div>
