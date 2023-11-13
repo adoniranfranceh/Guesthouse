@@ -12,7 +12,6 @@ class PriceCustomization < ApplicationRecord
     end
   end
 
-
   def validate_daily_rate_for_low_season
     if self.low_season? && self.daily_rate > room.daily_rate
       self.errors.add(:daily_rate, "só pode ser maior que à Diária Padrão se for Temporada Alta")

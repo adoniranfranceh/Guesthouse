@@ -5,9 +5,9 @@ class Room < ApplicationRecord
   validates :title, :description, :dimension, :max_occupancy, :daily_rate, presence: true
 
   def current_price_customization
-    date_current_customized = price_customizations.where('start_date <= ? AND end_date >= ?', Date.today, Date.today)
-    if date_current_customized.exists?
-      date_current_customized.last
+    date_current_customized = price_customizations.find_by('start_date <= ? AND end_date >= ?', Date.today, Date.today)
+    if date_current_customized.present?
+      date_current_customized
     end
   end
 
