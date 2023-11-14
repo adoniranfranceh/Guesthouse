@@ -1,0 +1,30 @@
+<% if @room_reservation.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @room_reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= render 'rooms/room' %>
+
+<h2>Faça uma Reserva</h2>
+
+<%= form_with(url: confirm_room_room_reservations_path(room_id: @room.id), method: :get) do |f| %>
+  <div>
+    <%= f.label :check_in, autofocus: true %>
+    <%= f.date_field :check_in %>
+  </div>
+  <div>
+    <%= f.label :check_out %>
+    <%= f.date_field :check_out %>
+  </div>
+  <div>
+    <%= f.label :number_of_guests, 'Quantidade de Hóspedes' %>
+    <%= f.number_field :number_of_guests %>
+  </div>
+
+  <%= f.submit 'Salvar' %>
+<% end %>

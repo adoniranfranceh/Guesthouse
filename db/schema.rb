@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_03_035907) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_13_223015) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -60,6 +60,19 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_035907) do
     t.index ["room_id"], name: "index_price_customizations_on_room_id"
   end
 
+  create_table "room_reservations", force: :cascade do |t|
+    t.date "check_in"
+    t.date "check_out"
+    t.string "quantity"
+    t.integer "number_of_guests"
+    t.integer "room_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_room_reservations_on_room_id"
+    t.index ["user_id"], name: "index_room_reservations_on_user_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.integer "inn_id", null: false
     t.string "title"
@@ -80,7 +93,23 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_035907) do
     t.index ["inn_id"], name: "index_rooms_on_inn_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "name"
+    t.string "cpf"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "inns", "admins"
   add_foreign_key "price_customizations", "rooms"
+  add_foreign_key "room_reservations", "rooms"
+  add_foreign_key "room_reservations", "users"
   add_foreign_key "rooms", "inns"
 end
