@@ -76,7 +76,6 @@ describe 'Visitante vê reservas de um quarto' do
     click_on 'Salvar'
 
     # Assert
-
     expect(page).to have_content('Informações Sobre Sua Reserva')
     expect(page).to have_content('Preço total de diárias: 1300')
     expect(page).to have_content('Check in: 14/11/2023 15:00')
