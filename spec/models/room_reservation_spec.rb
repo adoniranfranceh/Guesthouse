@@ -15,7 +15,7 @@ RSpec.describe RoomReservation, type: :model do
       room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
                           max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                           tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-      user = User.create!(email: 'joao@email.com', password: 'password')
+      user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
       RoomReservation.create!(user: user, room: room, check_in: 1.week.from_now, check_out: 2.week.from_now, number_of_guests: 4)
       reservation = RoomReservation.new(user: user, room: room, check_in: 10.day.from_now, check_out: 2.week.from_now, number_of_guests: 4)
       # Act
@@ -38,10 +38,10 @@ RSpec.describe RoomReservation, type: :model do
       other_room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
                           max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                           tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-      joao = User.create!(email: 'joao@email.com', password: 'password')
+      joao = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
       RoomReservation.new(user: joao, room: other_room, check_in: 10.day.from_now, check_out: 2.week.from_now, number_of_guests: 4)
 
-      marcos = User.create!(email: 'marcos@email.com', password: 'password')
+      marcos = User.create!(name: 'Marcos Alcântara', cpf: '83041333007', email: 'marcos@email.com', password: 'password')
       room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
                   max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                   tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
@@ -70,7 +70,7 @@ RSpec.describe RoomReservation, type: :model do
       room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
                           max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                           tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-      user = User.create!(email: 'joao@email.com', password: 'password')
+      user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
       reservation = RoomReservation.new(user: user, room: room, check_in: '', check_out: 2.week.from_now, number_of_guests: 4)
       # Act
       # Assert
@@ -92,7 +92,7 @@ RSpec.describe RoomReservation, type: :model do
       room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
                           max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                           tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-      user = User.create!(email: 'joao@email.com', password: 'password')
+      user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
       reservation = RoomReservation.new(user: user, room: room, check_in: 1.week.from_now, check_out: '', number_of_guests: 4)
       # Act
       # Assert
@@ -114,7 +114,7 @@ RSpec.describe RoomReservation, type: :model do
       room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
                           max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                           tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-      user = User.create!(email: 'joao@email.com', password: 'password')
+      user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
       reservation = RoomReservation.new(user: user, room: room, check_in: 1.week.from_now, check_out: 2.week.from_now, number_of_guests: '')
       # Act
       # Assert
@@ -137,7 +137,7 @@ RSpec.describe RoomReservation, type: :model do
       room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
                           max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                           tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-      user = User.create!(email: 'joao@email.com', password: 'password')
+      user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
       reservation = RoomReservation.new(user: user, room: room, check_in: 1.week.from_now, check_out: 2.week.from_now, number_of_guests: 8)
 
       result = reservation.valid?

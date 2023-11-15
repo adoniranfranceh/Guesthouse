@@ -1,0 +1,6 @@
+<h1>Reserva</h1>
+
+<%= render partial: 'room_reservation', locals: { check_in: @room_reservation.check_in, 
+	                                                check_out: @room_reservation.check_out,
+	                                                number_of_guests: @room_reservation.number_of_guests } %>
+<p>Total: <%= @room_reservation.total_daily_rates %></p>

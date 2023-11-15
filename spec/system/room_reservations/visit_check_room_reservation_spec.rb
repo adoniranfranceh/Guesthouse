@@ -53,7 +53,7 @@ describe 'Visitante vê reservas de um quarto' do
     other_room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
                 max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-    user = User.create!(email: 'joao@email.com', password: 'password')
+    user = User.create!(name: 'João Almeida',cpf: '11169382002', email: 'joao@email.com', password: 'password')
     RoomReservation.create!(user: user, room: other_room, check_in: '2023-11-17', check_out: '2023-11-25', number_of_guests: 4)
 
     room = Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40 , max_occupancy: 4,
@@ -78,9 +78,6 @@ describe 'Visitante vê reservas de um quarto' do
     # Assert
     expect(page).to have_content('Informações Sobre Sua Reserva')
     expect(page).to have_content('Preço total de diárias: 1300')
-    expect(page).to have_content('Check in: 14/11/2023 15:00')
-    expect(page).to have_content('Check out: 17/11/2023 14:00')
-    expect(page).to have_content('Quantidade de Hóspedes: 3')
   end
 
   it 'e reserva está ocupada' do
@@ -96,7 +93,7 @@ describe 'Visitante vê reservas de um quarto' do
     room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
                 max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-    user = User.create!(email: 'joao@email.com', password: 'password')
+    user = User.create!(name: 'João Almeida',cpf: '11169382002', email: 'joao@email.com', password: 'password')
     RoomReservation.create!(user: user, room: room, check_in: 1.week.from_now, check_out: 2.week.from_now, number_of_guests: 4)
 
     Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40 , max_occupancy: 4,

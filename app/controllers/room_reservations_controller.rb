@@ -1,6 +1,9 @@
 class RoomReservationsController < ApplicationController
-  before_action :set_room
-  before_action :authenticate_user!, only: [:create]
+  before_action :set_room, except: [:index]
+  before_action :authenticate_user!, only: [:create, :index, :show]
+  def index
+    @room_reservations = current_user.room_reservations
+  end
   def new
     @room_reservation = RoomReservation.new
   end
@@ -21,9 +24,12 @@ class RoomReservationsController < ApplicationController
   def create
     @room_reservation = @room.room_reservations.build(room_reservation_params)
     @room_reservation.user = current_user
-
     @room_reservation.save!
-    redirect_to root_path, notice: "Nova reserva registrada"
+    redirect_to room_reservations_path, notice: "Nova reserva registrada"
+  end
+
+  def show
+    @room_reservation = RoomReservation.find(params[:id])
   end
 
   private

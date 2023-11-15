@@ -30,6 +30,9 @@
                 <%= button_to 'Sair', destroy_admin_session_path, method: :delete, class: "btn btn-danger" %>
               </li>
             <% end %>
+            <% if user_signed_in? %>
+              <%= link_to 'Minhas Reservas', room_reservations_path %>
+            <% end %>
           </ul>
         </div>
       </div>

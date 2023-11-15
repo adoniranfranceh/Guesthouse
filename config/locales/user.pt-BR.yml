@@ -1,8 +1,8 @@
 pt-BR:
   activerecord:
     models:
-      admin: Administrador
+      user: Administrador
     attributes:
-      admin:
+      user:
         name: Nome
         cpf: CPF

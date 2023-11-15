@@ -15,10 +15,11 @@ Rails.application.routes.draw do
     get :admin_show, on: :member
   end
   resources :rooms, only: [:index] do
-    resources :room_reservations, only: [:new, :create] do
+    resources :room_reservations, only: [:new, :create, :show] do
       get 'confirm', on: :collection
     end
   end
+  resources :room_reservations, only: [:index]
   resources :advanced_searches, only: [:index] do
     get :search, on: :collection
   end
