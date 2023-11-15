@@ -1,0 +1,10 @@
+<h5><%= @room.inn.brand_name %></h5>
+<h6><%= @room.title %></h6>
+<p>
+  <%= RoomReservation.human_attribute_name('check_in') %>: <%= l(check_in) %> <%= @room.inn.check_in.strftime('%H:%M') %>
+</p>
+<p>
+  <%= RoomReservation.human_attribute_name('check_out') %>: <%= l(check_out) %> <%= @room.inn.check_out.strftime('%H:%M') %>
+</p>
+<p><%= Inn.human_attribute_name('payment_methods') %>: <%= @room.inn.payment_methods %>></p>
+<p><%= RoomReservation.human_attribute_name('number_of_guests') %>: <%= number_of_guests %></p>

@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    models:
+      user: Administrador
+    attributes:
+      user:
+        name: Nome
+        cpf: CPF

@@ -1,0 +1,10 @@
+<h1>Reserva <%= @room_reservation.code %></h1>
+
+<%= render partial: 'room_reservation', locals: { check_in: @room_reservation.check_in, 
+	                                                check_out: @room_reservation.check_out,
+	                                                number_of_guests: @room_reservation.number_of_guests } %>
+<p>Total: <%= @room_reservation.total_daily_rates %></p>
+
+<% unless @room_reservation.pending? && @room_reservation.less_than_7_days_to_check_in? %>
+  <%= button_to 'Cancelar', cancel_room_reservation_path(@room_reservation.id) %>
+<% end %>

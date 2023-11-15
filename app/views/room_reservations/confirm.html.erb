@@ -1,12 +1,12 @@
 <h1>Informações Sobre Sua Reserva</h1>
-<h2><%= @room.inn.brand_name %></h2>
-<h3><%= @room.title %></h3>
 
 <h4>Preço total de diárias: <%= @total_daily_rates %></h4>
-<p><%= RoomReservation.human_attribute_name('check_in') %>: <%= l(Date.parse(@check_in)) %> <%= @room.inn.check_in.strftime('%H:%M') %></p>
-<p><%= RoomReservation.human_attribute_name('check_out') %>: <%= l(Date.parse(@check_out)) %> <%= @room.inn.check_out.strftime('%H:%M') %></p>
-<p><%= RoomReservation.human_attribute_name('number_of_guests') %>: <%= @number_of_guests %></p>
 
+<% if user_signed_in? %>
+  <%= render partial: 'room_reservation', locals: { check_in: Date.parse(@check_in),
+                                                    check_out: Date.parse(@check_out),
+                                                    number_of_guests: @number_of_guests } %>
+<% end %>
 <%= form_with(model: [@room, @room_reservation]) do |f| %>
   <%= f.hidden_field :check_in, value: @check_in %>
   <%= f.hidden_field :check_out, value: @check_out %>
