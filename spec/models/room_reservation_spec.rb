@@ -56,7 +56,6 @@ RSpec.describe RoomReservation, type: :model do
   end
 
   describe '#valid' do
-
     it 'false se check_in estiver em branco' do
       # Arrange
       admin = Admin.create!(name: 'Admin', email: 'admin@admin.com', password: 'password')

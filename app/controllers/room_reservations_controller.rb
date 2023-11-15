@@ -1,6 +1,7 @@
 class RoomReservationsController < ApplicationController
-  before_action :set_room, except: [:index]
+  before_action :set_room, except: [:index, :cancel]
   before_action :authenticate_user!, only: [:create, :index, :show]
+  before_action :set_room_reservation, only: [:show, :cancel]
   def index
     @room_reservations = current_user.room_reservations
   end
@@ -28,11 +29,21 @@ class RoomReservationsController < ApplicationController
     redirect_to room_reservations_path, notice: "Nova reserva registrada"
   end
 
-  def show
-    @room_reservation = RoomReservation.find(params[:id])
+  def show; end
+
+  def cancel
+    if @room_reservation.user != current_user || @room_reservation.less_than_7_days_to_check_in?
+      return redirect_to root_path, notice: 'Você não tem permisão para concluir esta ação'
+    end
+    @room_reservation.canceled!
+    redirect_to room_reservations_path, notice: 'Reserva cancelada com sucesso'
   end
 
   private
+
+  def set_room_reservation
+    @room_reservation = RoomReservation.find(params[:id])
+  end
 
   def set_room
     @room = Room.find(params[:room_id])

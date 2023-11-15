@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário vê suas próprias reservas' do
-  it 'a partir da tela inicial' do
+describe 'Usuário cancela uma reserva' do
+  it 'com sucesso' do
     # Arrange
     admin = Admin.create!(name: 'Admin', email: 'admin@admin.com', password: 'password')
     guesthouse = Inn.create!(admin: admin, brand_name: 'Pousada Árvore da Coruja', corporate_name: 'Pousada Guest LTDA',
@@ -15,20 +15,21 @@ describe 'Usuário vê suas próprias reservas' do
                 max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
     user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
-    r = RoomReservation.create!(user: user, room: room, check_in: '2023-11-17', check_out: '2023-11-18', number_of_guests: 4)
+    RoomReservation.create!(user: user, room: room, check_in: 7.day.from_now, check_out: 8.day.from_now, number_of_guests: 4)
     
     # Act
     login_as(user, scope: :user)
     visit root_path
     click_on('Minhas Reservas')
+    click_on('Bangalô Família')
+    click_on('Cancelar')
 
     # Assert
-    expect(page).to have_content('Bangalô Família')
-    expect(page).to have_content('Total: 600')
-    expect(r.code.length).to eq(8)
+    expect(page).to have_content('Reserva cancelada com sucesso')
+    expect(RoomReservation.last.status).to eq('canceled')
   end
 
-  it 'e não vê de outro usuário' do
+  it 'e não pode mais cancelar' do
     # Arrange
     admin = Admin.create!(name: 'Admin', email: 'admin@admin.com', password: 'password')
     guesthouse = Inn.create!(admin: admin, brand_name: 'Pousada Árvore da Coruja', corporate_name: 'Pousada Guest LTDA',
@@ -38,20 +39,19 @@ describe 'Usuário vê suas próprias reservas' do
                                     description: 'Pousada Árvore Da Coruja oferece acomodação com lounge compartilhado.',
                                     payment_methods: 'Crédito e Débito', accepts_pets: true,
                                     usage_policies: 'Não é permitido fumar', check_in: '15:00', check_out: '14:00', status: :active)
-    other_room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
+    room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
                 max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-    other_user = User.create!(name: 'Maria', cpf: '83041333007', email: 'maria@email.com', password: 'password')
     user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
-    RoomReservation.create!(user: other_user, room: other_room, check_in: '2023-11-17', check_out: '2023-11-25', number_of_guests: 4)
+    r = RoomReservation.create!(user: user, room: room, check_in: 4.day.from_now, check_out: 8.day.from_now, number_of_guests: 4)
     
     # Act
     login_as(user, scope: :user)
     visit root_path
     click_on('Minhas Reservas')
+    click_on('Bangalô Família')
 
     # Assert
-    expect(page).not_to have_content('Bangalô Família')
-    expect(page).not_to have_content('Total: 600')
+    expect(page).not_to have_button('Cancelar')
   end
 end

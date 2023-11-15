@@ -15,6 +15,7 @@ describe 'Usuário vê detalhes de uma reserva' do
                 max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
     user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABCD1234')
     RoomReservation.create!(user: user, room: room, check_in: '2023-11-17', check_out: '2023-11-18', number_of_guests: 4)
     
     # Act
@@ -23,7 +24,7 @@ describe 'Usuário vê detalhes de uma reserva' do
     click_on('Minhas Reservas')
     click_on('Bangalô Família')
     # Assert
-    expect(page).to have_content('Reserva')
+    expect(page).to have_content('Reserva ABCD1234')
     expect(page).to have_content('Check in: 17/11/2023 15:00')
     expect(page).to have_content('Check out: 18/11/2023 14:00')
     expect(page).to have_content('Quantidade de Hóspedes: 4')
