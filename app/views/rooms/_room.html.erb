@@ -1,10 +1,17 @@
-<% if rooms.any? %>
-  <% @rooms.each do |room| %>
-    <h3><%= link_to room.title, inn_room_path(id: room.id, inn_id: room.inn.id) %></h3>
-    <p>Área do Quarto: <%= room.dimension %>m²</p>
-    <p><%= room.description %></p>
-    <p>Ocupação Máxima: <%= room.max_occupancy %></p>
-  <% end %>
-<% else %>
-  <p>Não há quartos disponíveis</p>
-<% end %>
+<h1><%= @room.title %></h1>
+
+
+<p><%= @room.description %></p>
+
+<ul>
+  <li><strong>Área do Quarto:</strong> <%= @room.dimension %>m²</li>
+  <li><strong>Capacidade Máxima:</strong> <%= @room.max_occupancy %> pessoas</li>
+  <li><strong>Diária Padrão:</strong> R$ <%= @room.daily_rate %>,00</li>
+  <li><%= Room.human_attribute_name('private_bathroom') if @room.private_bathroom? %></li>
+  <li><%= Room.human_attribute_name('balcony') if @room.balcony? %></li>
+  <li><%= Room.human_attribute_name('air_conditioning') if @room.air_conditioning?  %></li>
+  <li><%= Room.human_attribute_name('tv') if @room.tv?  %></li>
+  <li><%= Room.human_attribute_name('wardrobe') if @room.wardrobe? %></li>
+  <li><%= Room.human_attribute_name('safe_available') if @room.safe_available? %></li>
+  <li><%= Room.human_attribute_name('accessible_for_disabled') if @room.accessible_for_disabled?%></li>
+</ul>

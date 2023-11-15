@@ -28,7 +28,7 @@ describe 'Administrador vê seus próprios quartos' do
                 max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
     # Act
-    login_as(admin)
+    login_as(admin, scope: :admin)
     visit root_path
     click_on('Minha Pousada')
 

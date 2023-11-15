@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      room_reservation: Reserva de Quarto
+    attributes:
+      room_reservation:
+        check_in: 'Check in'
+        check_out: 'Check out'
+        number_of_guests: 'Quantidade de Hóspedes'

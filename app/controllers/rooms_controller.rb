@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @inn = Inn.find(params[:id])
+    @inn = Inn.find(params[:inn_id])
     @price_customizations = @room.price_customizations
     if @inn.admin != current_admin && @room.unavailable?
       redirect_to root_path, notice: "Quarto #{@room.title} está desabilitado para reservas"

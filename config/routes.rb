@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   devise_for :admins
   root "home#index"
   get 'city/:city' => 'inns#by_city', as: 'by_city'
@@ -13,7 +14,11 @@ Rails.application.routes.draw do
     post :inactive, on: :member
     get :admin_show, on: :member
   end
-  resources :rooms, only: [:index]
+  resources :rooms, only: [:index] do
+    resources :room_reservations, only: [:new, :create] do
+      get 'confirm', on: :collection
+    end
+  end
   resources :advanced_searches, only: [:index] do
     get :search, on: :collection
   end

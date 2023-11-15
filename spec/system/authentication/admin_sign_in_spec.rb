@@ -21,7 +21,7 @@ describe 'Administrador se autentica' do
     admin = Admin.create!(name: 'admin', email: 'admin@admin.com', password: 'password')
     
     # Act
-    login_as admin
+    login_as(admin, scope: :admin)
     visit root_path
     click_on('Sair')
 
