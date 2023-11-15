@@ -1,9 +1,8 @@
 class RoomReservationsController < ApplicationController
-
-	def new
+  def new
     @room = Room.find(params[:room_id])
     @room_reservation = RoomReservation.new
-	end
+  end
 
   def confirm
     @check_in = params[:check_in]
@@ -14,7 +13,7 @@ class RoomReservationsController < ApplicationController
     @room_reservation = @room.room_reservations.build(check_in: @check_in, check_out: @check_out)
     return render :new if @room_reservation.there_is_a_reservation_for_that_date
     unless @check_in.present? || @check_out.present? || @number_of_guests.present?
-    	flash.now[:alert] = 'Preencha todos os campos corretamente'
+      flash.now[:alert] = 'Preencha todos os campos corretamente'
       return render :new
     end
   end
