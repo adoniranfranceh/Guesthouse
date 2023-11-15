@@ -1,7 +1,12 @@
 class RoomReservationsController < ApplicationController
-  before_action :set_room, except: [:index, :cancel]
+  before_action :set_room, except: [:index, :cancel, :index_admin]
   before_action :authenticate_user!, only: [:create, :index, :show]
   before_action :set_room_reservation, only: [:show, :cancel]
+  before_action :authenticate_admin!, only: [:index_admin]
+  def index_admin
+    @room_reservations = current_admin.inn.room_reservations
+  end
+
   def index
     @room_reservations = current_user.room_reservations
   end

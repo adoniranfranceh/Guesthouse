@@ -1,6 +1,7 @@
 class Inn < ApplicationRecord
   belongs_to :admin
   has_many :rooms
+  has_many :room_reservations, through: :rooms
   validates :brand_name, :corporate_name, :registration_number, :phone,
             :email, :address, :neighborhood, :state, :city, :zip_code, :description,
             :payment_methods, :usage_policies, :check_in, :check_out, presence: true
