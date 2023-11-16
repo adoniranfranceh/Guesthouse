@@ -1,10 +1,22 @@
 class RoomReservationsController < ApplicationController
-  before_action :set_room, except: [:index, :cancel]
+  before_action :set_room, except: [:index, :cancel, :index_admin, :make_check_in, :cancel_admin, :actives]
   before_action :authenticate_user!, only: [:create, :index, :show]
-  before_action :set_room_reservation, only: [:show, :cancel]
+  before_action :set_room_reservation, only: [:show, :cancel, :show_admin, :make_check_in, :cancel_admin]
+  before_action :authenticate_admin!, only: [:index_admin, :show_admin]
+  def index_admin
+    @room_reservations = current_admin.inn.room_reservations
+  end
+
   def index
     @room_reservations = current_user.room_reservations
   end
+
+  def actives
+    @room_reservations = current_admin.inn.room_reservations.active
+  end
+
+  def show_admin; end
+
   def new
     @room_reservation = RoomReservation.new
   end
@@ -37,6 +49,23 @@ class RoomReservationsController < ApplicationController
     end
     @room_reservation.canceled!
     redirect_to room_reservations_path, notice: 'Reserva cancelada com sucesso'
+  end
+
+  def cancel_admin
+    unless @room_reservation.room.inn.admin == current_admin || @room_reservation.two_days_late_for_check_in?
+      return redirect_to root_path, notice: 'Você não tem permisão para concluir esta ação'
+    end
+    @room_reservation.canceled!
+    redirect_to index_admin_room_reservations_path, notice: 'Reserva cancelada com sucesso'
+  end
+
+  def make_check_in
+    unless @room_reservation.room.inn.admin == current_admin || @room_reservation.reservation_if_check_in
+      return redirect_to root_path, notice: 'Você não tem permisão para concluir esta ação'
+    end
+    @room_reservation.active!
+    redirect_to show_admin_room_reservations_path(room_id: @room_reservation.room.id, id: @room_reservation.id),
+                notice: 'Reserva ativa com sucesso'
   end
 
   private

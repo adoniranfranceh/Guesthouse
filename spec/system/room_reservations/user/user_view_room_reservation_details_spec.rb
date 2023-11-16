@@ -24,7 +24,7 @@ describe 'Usuário vê detalhes de uma reserva' do
     click_on('Minhas Reservas')
     click_on('Bangalô Família')
     # Assert
-    expect(page).to have_content('Reserva ABCD1234')
+    expect(page).to have_content('Reserva: ABCD1234')
     expect(page).to have_content('Check in: 17/11/2023 15:00')
     expect(page).to have_content('Check out: 18/11/2023 14:00')
     expect(page).to have_content('Quantidade de Hóspedes: 4')

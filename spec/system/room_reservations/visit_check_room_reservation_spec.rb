@@ -13,7 +13,7 @@ describe 'Visitante vê reservas de um quarto' do
                                     usage_policies: 'Não é permitido fumar', check_in: '15:00', check_out: '14:00', status: :active)
 
     Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40 , max_occupancy: 4,
-    	          daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
+    	          daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true,
     	          tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
     # Act
     visit root_path
@@ -54,11 +54,13 @@ describe 'Visitante vê reservas de um quarto' do
                 max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
     user = User.create!(name: 'João Almeida',cpf: '11169382002', email: 'joao@email.com', password: 'password')
-    RoomReservation.create!(user: user, room: other_room, check_in: '2023-11-17', check_out: '2023-11-25', number_of_guests: 4)
-
+    RoomReservation.create!(user: user, room: other_room, check_in: '2023-11-17', check_out: '2023-11-25', number_of_guests: 4,
+                            status: :pending)
     room = Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40 , max_occupancy: 4,
-                daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
-                tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
+                       daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true,
+                       tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
+    RoomReservation.create!(user: user, room: room, check_in: '2023-11-14', check_out: '2023-11-16', number_of_guests: 2,
+                            status: :canceled)
     price_customization = PriceCustomization.create!(room: room, start_date: '2023-11-17',
                                                     end_date: '2023-12-30', daily_rate: 400,
                                                     season: :high_season, season_name: 'Fim de Ano')
@@ -97,7 +99,7 @@ describe 'Visitante vê reservas de um quarto' do
     RoomReservation.create!(user: user, room: room, check_in: 1.week.from_now, check_out: 2.week.from_now, number_of_guests: 4)
 
     Room.create!(inn: guesthouse, title: 'Chalé de 1 Quarto', description: 'Camas confortáveis', dimension: 40 , max_occupancy: 4,
-                daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true, 
+                daily_rate: 300, private_bathroom: true, balcony: true, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
     # Act
     visit root_path
