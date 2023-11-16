@@ -1,9 +1,7 @@
-<h1>Minhas Reservas</h1>
-
 <div>
   <% if @room_reservations.any? %>
     <% @room_reservations.each do |reservation| %>
-      <%= link_to room_room_reservation_path(room_id: reservation.room.id, id: reservation.id) do %>
+      <%= link_to show_admin_room_reservations_path(room_id: reservation.room.id, id: reservation.id) do %>
         <%= reservation.code %>
         <%= reservation.room.title %>
         <p>Total: <%= reservation.total_daily_rates %></p>

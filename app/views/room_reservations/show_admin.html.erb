@@ -1,0 +1,17 @@
+<h3>Reserva: <%= @room_reservation.code %></h3>
+<p>Status: <%= t(@room_reservation.status) %></p>
+<% if @room_reservation.guest_arrival %>
+  <p>Check in realizado em: <%= l(@room_reservation.guest_arrival, format: '%d/%m/%Y %H:%M') %></p>
+<% end %>
+<p>Hóspede: <%= @room_reservation.user.name %></p>
+<%= render partial: 'room_reservation', locals: { check_in: @room_reservation.check_in,
+                                                  check_out: @room_reservation.check_out,
+                                                  number_of_guests: @room_reservation.number_of_guests } %>
+
+<% if @room_reservation.reservation_if_check_in %>
+  <%= button_to 'Fazer check in', make_check_in_room_reservation_path(@room_reservation.id) %>
+<% end %>
+
+<% if @room_reservation.two_days_late_for_check_in? %>
+  <%= button_to 'Cancelar', cancel_admin_room_reservation_path(@room_reservation.id) %>
+<% end %>

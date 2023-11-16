@@ -25,17 +25,22 @@
             <li class="nav-item">
               <%= dynamic_link_inn %>
             </li>
-            <li class="nav-item">
-              <%= link_to 'Reservas', index_admin_room_reservations_path %>
-            </li>
             <% if admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to 'Reservas', index_admin_room_reservations_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Estadias Ativas', actives_room_reservations_path, class: "nav-link" %>
+              </li>
               <li class="nav-item">
                 <%= button_to 'Sair', destroy_admin_session_path, method: :delete, class: "btn btn-danger" %>
               </li>
             <% end %>
 
             <% if user_signed_in? %>
-              <%= link_to 'Minhas Reservas', room_reservations_path %>
+              <li class="nav-item">
+                <%= link_to 'Minhas Reservas', room_reservations_path, class: "nav-link" %>
+              </li>
             <% end %>
           </ul>
         </div>

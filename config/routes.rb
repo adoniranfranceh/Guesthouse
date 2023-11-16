@@ -20,8 +20,16 @@ Rails.application.routes.draw do
     end
   end
   resources :room_reservations, only: [:index] do
-    get :index_admin, on: :collection
-    post :cancel, on: :member
+    collection do
+      get :index_admin
+      get :show_admin
+      get :actives
+    end
+    member do
+      post :cancel_admin
+      post :cancel
+      post :make_check_in
+    end
   end
   resources :advanced_searches, only: [:index] do
     get :search, on: :collection

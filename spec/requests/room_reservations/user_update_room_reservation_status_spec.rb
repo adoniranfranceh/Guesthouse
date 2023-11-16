@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário altera estado de uma reserva' do
+describe 'Usuário altera status de uma reserva' do
   context 'para cancelado' do
     it 'com sucesso' do
       # Arrange
@@ -24,6 +24,7 @@ describe 'Usuário altera estado de uma reserva' do
       post(cancel_room_reservation_path(r.id))
 
       # Assert
+      expect(response).to redirect_to room_reservations_path
       expect(RoomReservation.last.status).to eq('canceled')
     end
 

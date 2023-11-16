@@ -4,15 +4,18 @@ class RoomReservation < ApplicationRecord
 
   validates :check_in, :check_out, :number_of_guests, :total_daily_rates, :code, presence: true
   validate :there_is_a_reservation_for_that_date, on: [:create, :confirm]
-  validate :guest_limit
+  validate :guest_limit, :check_out_is_later
 
   before_validation :total_daily_rates_to_reserve
   before_validation :generate_code, on: :create
+  after_save :guest_arrival_when_check_in
 
-  enum status: { canceled: 0, pending: 5, in_progress: 10 }
+  enum status: { canceled: 0, pending: 5, active: 10 }
 
   def there_is_a_reservation_for_that_date
-    room_reservation = self.room.room_reservations.find_by('? <= check_out AND ? >= check_in', self.check_in, self.check_out)
+    room_reservation = self.room.room_reservations.where('? <= check_out AND ? >= check_in', self.check_in, self.check_out)
+                                                  .where.not(status: :canceled)
+
     if room_reservation.present?
       self.errors.add(:base, "Reserva não disponível entre #{I18n.l(check_in.to_date)} e #{I18n.l(check_out.to_date)}")
     end
@@ -29,7 +32,28 @@ class RoomReservation < ApplicationRecord
     days_remaining_to_check_in < 7
   end
 
+  def reservation_if_check_in
+    Date.today >= self.check_in
+  end
+
+  def two_days_late_for_check_in?
+    days_of_delay = Date.today - self.check_in
+    days_of_delay >= 2
+  end
+
   private
+
+  def check_out_is_later
+    if self.check_in.present? && self.check_out.present? && self.check_in > self.check_out
+      self.errors.add(:base, 'O Check in deve ser menor que o Check out')
+    end
+  end
+
+  def guest_arrival_when_check_in
+    if status == 'active' && guest_arrival.nil?
+      update(guest_arrival: Time.current)
+    end
+  end
 
   def generate_code
     self.code = SecureRandom.alphanumeric(8).upcase

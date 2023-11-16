@@ -1,7 +1,0 @@
-<div>
-  <% @room_reservations.each do |reservation| %>
-    <%= link_to reservation.room.title, room_room_reservation_path(room_id: reservation.room.id, id: reservation.id) %>
-    <%= reservation.code %>
-    <p>Total: <%= reservation.total_daily_rates %></p>
-  <% end %>
-</div>

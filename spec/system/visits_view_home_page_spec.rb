@@ -126,10 +126,11 @@ describe 'Visitante entram na página principal' do
       click_on 'Gramado'
     end
     # Assert
+    expect(page).not_to have_content('Reservas')
+    expect(page).not_to have_content('Estadias Ativas')
     expect(page).to have_content('Pousadas de Gramado')
     expect(page).to have_content('Pousada Árvore da Coruja')
     expect(page).to have_content('Pousada Nascer do Sol')
     expect(page).not_to have_content('Pousada Boa Vista')
-
   end
 end

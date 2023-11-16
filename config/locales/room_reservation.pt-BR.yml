@@ -1,4 +1,5 @@
 pt-BR:
+  active: 'Ativo'
   activerecord:
     models:
       room_reservation: Reserva de Quarto
