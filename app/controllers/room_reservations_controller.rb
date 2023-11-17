@@ -1,8 +1,8 @@
 class RoomReservationsController < ApplicationController
-  before_action :set_room, except: [:index, :cancel, :index_admin, :make_check_in, :cancel_admin, :actives]
+  before_action :set_room, except: [:index, :cancel, :index_admin, :make_check_in, :cancel_admin, :actives, :make_check_out]
   before_action :authenticate_user!, only: [:create, :index, :show]
-  before_action :set_room_reservation, only: [:show, :cancel, :show_admin, :make_check_in, :cancel_admin]
-  before_action :authenticate_admin!, only: [:index_admin, :show_admin]
+  before_action :set_room_reservation, only: [:show, :cancel, :show_admin, :make_check_in, :cancel_admin, :make_check_out]
+  before_action :authenticate_admin!, only: [:index_admin, :show_admin, :actives]
   def index_admin
     @room_reservations = current_admin.inn.room_reservations
   end
@@ -52,7 +52,7 @@ class RoomReservationsController < ApplicationController
   end
 
   def cancel_admin
-    unless @room_reservation.room.inn.admin == current_admin || @room_reservation.two_days_late_for_check_in?
+    unless @room_reservation.room.inn.admin == current_admin && @room_reservation.two_days_late_for_check_in?
       return redirect_to root_path, notice: 'Você não tem permisão para concluir esta ação'
     end
     @room_reservation.canceled!
@@ -60,12 +60,22 @@ class RoomReservationsController < ApplicationController
   end
 
   def make_check_in
-    unless @room_reservation.room.inn.admin == current_admin || @room_reservation.reservation_if_check_in
+    unless @room_reservation.room.inn.admin == current_admin && @room_reservation.reservation_if_check_in
       return redirect_to root_path, notice: 'Você não tem permisão para concluir esta ação'
     end
     @room_reservation.active!
     redirect_to show_admin_room_reservations_path(room_id: @room_reservation.room.id, id: @room_reservation.id),
                 notice: 'Reserva ativa com sucesso'
+  end
+
+  def make_check_out
+    unless @room_reservation.room.inn.admin == current_admin && @room_reservation.active?
+      return redirect_to root_path, notice: 'Você não tem permisão para concluir esta ação'
+    end
+    @room_reservation.update(chosen_payment_method: params[:chosen_payment_method])
+    @room_reservation.closed!
+    redirect_to show_admin_room_reservations_path(room_id: @room_reservation.room.id, id: @room_reservation.id),
+                notice: 'Reserva finalizada com sucesso'
   end
 
   private

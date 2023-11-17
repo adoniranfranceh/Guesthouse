@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       post :cancel_admin
       post :cancel
       post :make_check_in
+      post :make_check_out
     end
   end
   resources :advanced_searches, only: [:index] do

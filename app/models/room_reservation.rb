@@ -9,8 +9,9 @@ class RoomReservation < ApplicationRecord
   before_validation :total_daily_rates_to_reserve
   before_validation :generate_code, on: :create
   after_save :guest_arrival_when_check_in
+  after_save :guest_departure_when_check_out
 
-  enum status: { canceled: 0, pending: 5, active: 10 }
+  enum status: { canceled: 0, pending: 5, active: 10, closed: 15 }
 
   def there_is_a_reservation_for_that_date
     room_reservation = self.room.room_reservations.where('? <= check_out AND ? >= check_in', self.check_in, self.check_out)
@@ -39,6 +40,12 @@ class RoomReservation < ApplicationRecord
   def two_days_late_for_check_in?
     days_of_delay = Date.today - self.check_in
     days_of_delay >= 2
+  end
+
+  def guest_departure_when_check_out
+    if status == 'closed' && guest_departure.nil?
+      self.update(guest_departure: Time.current, paid: room.total_price(guest_arrival.to_date, Date.current))
+    end
   end
 
   private

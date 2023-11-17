@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_16_155340) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_17_153616) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -73,6 +73,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_16_155340) do
     t.string "code"
     t.integer "status", default: 5
     t.datetime "guest_arrival"
+    t.string "chosen_payment_method"
+    t.datetime "guest_departure"
+    t.integer "paid"
     t.index ["room_id"], name: "index_room_reservations_on_room_id"
     t.index ["user_id"], name: "index_room_reservations_on_user_id"
   end

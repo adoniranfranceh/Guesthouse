@@ -33,5 +33,7 @@ describe 'Administrador vê detalhes de uma reserva de sua pousada' do
     expect(page).to have_content('Check in: 25/12/2023 15:00')
     expect(page).to have_content('Check out: 30/12/2023 14:00')
     expect(page).to have_content('Quantidade de Hóspedes: 4')
+    expect(page).to have_content('Status: Pendente')
+    expect(page).not_to have_content('Valor do dia atual')
   end
 end
