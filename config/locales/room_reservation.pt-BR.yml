@@ -1,5 +1,8 @@
 pt-BR:
+  closed: 'Finalizado'
   active: 'Ativo'
+  pending: 'Pendente'
+  canceled: 'Cancelado'
   activerecord:
     models:
       room_reservation: Reserva de Quarto
@@ -8,3 +11,4 @@ pt-BR:
         check_in: 'Check in'
         check_out: 'Check out'
         number_of_guests: 'Quantidade de Hóspedes'
+        chosen_payment_method: 'Meio de Pagamento Escolhido'

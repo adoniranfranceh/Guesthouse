@@ -1,17 +1,46 @@
 <h3>Reserva: <%= @room_reservation.code %></h3>
 <p>Status: <%= t(@room_reservation.status) %></p>
-<% if @room_reservation.guest_arrival %>
-  <p>Check in realizado em: <%= l(@room_reservation.guest_arrival, format: '%d/%m/%Y %H:%M') %></p>
+
+<% if @room_reservation.active? %>
+  <p>
+    Valor do dia atual:
+    <%= @room_reservation.room.total_price(@room_reservation.guest_arrival.to_date, Date.current) %>
+  </p>
 <% end %>
+
+<% if @room_reservation.guest_arrival %>
+  <p>Check in realizado em: <%= localize(@room_reservation.guest_arrival, format: '%d/%m/%Y %H:%M') %></p>
+<% end %>
+
+<% if @room_reservation.closed? %>
+  <p>Total pago: <%= @room_reservation.paid %></p>
+  <p>Check out realizado em: <%= localize(@room_reservation.guest_departure, format: '%d/%m/%Y %H:%M') %></p>
+  <p><%= RoomReservation.human_attribute_name('chosen_payment_method') %>: <%= @room_reservation.chosen_payment_method %></p>
+<% end %>
+
 <p>Hóspede: <%= @room_reservation.user.name %></p>
+<h3>Previsões</h3>
 <%= render partial: 'room_reservation', locals: { check_in: @room_reservation.check_in,
                                                   check_out: @room_reservation.check_out,
                                                   number_of_guests: @room_reservation.number_of_guests } %>
 
-<% if @room_reservation.reservation_if_check_in %>
-  <%= button_to 'Fazer check in', make_check_in_room_reservation_path(@room_reservation.id) %>
+<% if @room_reservation.pending? %>
+  <% if @room_reservation.reservation_if_check_in %>
+    <%= button_to 'Fazer check in', make_check_in_room_reservation_path(@room_reservation.id) %>
+  <% end %>
+
+  <% if @room_reservation.pending? && @room_reservation.two_days_late_for_check_in? %>
+    <%= button_to 'Cancelar', cancel_admin_room_reservation_path(@room_reservation.id) %>
+  <% end %>
 <% end %>
 
-<% if @room_reservation.two_days_late_for_check_in? %>
-  <%= button_to 'Cancelar', cancel_admin_room_reservation_path(@room_reservation.id) %>
+<% if @room_reservation.active? %>
+  <h3>Realizar check out</h3>
+  <%= form_with(url: make_check_out_room_reservation_path(@room_reservation.id)) do |f| %>
+    <div>
+      <%= f.label :chosen_payment_method, RoomReservation.human_attribute_name('chosen_payment_method') %>
+      <%= f.text_field :chosen_payment_method %>
+    </div>
+    <%= f.submit 'Fazer check out' %>
+  <% end %>
 <% end %>

@@ -16,8 +16,8 @@ class Room < ApplicationRecord
     total_price = 0
 
     (check_in..check_out).each do |date|
-      daily_rate = current_daily_rate(date: date)
-      total_price += daily_rate
+        daily_rate = current_daily_rate(date: date)
+        total_price += daily_rate
     end
 
     total_price
