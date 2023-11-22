@@ -1,4 +1,5 @@
 class ReviewResponsesController < ApplicationController
+  before_action :authenticate_admin!
   def create
     review_response_params = params.require(:review_response).permit(:comment)
     @rating = Rating.find(params[:rating_id])

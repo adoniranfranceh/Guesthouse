@@ -1,4 +1,4 @@
-<%= render 'rating' %>
+<%= render partial: 'rating', locals: {rating: @rating} %>
 <%= render partial: 'review_responses', locals: { admin: 'Você' } %>
 
 <%= form_with(model: [@rating, @review_response]) do |f| %>

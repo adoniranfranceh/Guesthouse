@@ -1,12 +1,12 @@
 class RatingsController < ApplicationController
   before_action :authenticate_admin!, only: [:index_admin, :show_admin]
-  before_action :authenticate_user!, only: [:create, :show]
+  before_action :authenticate_user!, only: [:create]
   before_action :set_rating, only: [:show_admin, :show]
   def create
     rating_params = params.require(:rating).permit(:grade,
                                                   :comment)
     @room_reservation = RoomReservation.find(params[:room_reservation_id])
-    @rating = @room_reservation.ratings.build(rating_params)
+    @rating = @room_reservation.build_rating(rating_params)
     @rating.save
     redirect_to room_room_reservation_path(room_id: @room_reservation.room.id, id: @room_reservation.id),
                 notice: 'Avaliação enviada com sucesso!'
@@ -21,6 +21,11 @@ class RatingsController < ApplicationController
   end
 
   def show; end
+
+  def index
+    @inn = Inn.find(params[:inn_id])
+    @ratings = @inn.ratings
+  end
 
   private
 

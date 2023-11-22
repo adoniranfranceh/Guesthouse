@@ -1,8 +1,8 @@
-<h1>Avaliações</h1>
+<h1>Avaliações da <%= @inn.brand_name %></h1>
 
 <% if @ratings.present? %>
   <% @ratings.each do |rating| %>
-    <%= link_to show_admin_rating_path(rating.id) do %>
+    <%= link_to rating_path(rating.id) do %>
       <%= render partial: 'rating', locals: {rating: rating} %>
     <% end %>
   <% end %>

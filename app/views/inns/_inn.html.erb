@@ -29,10 +29,22 @@
   <dd><%= @inn.email %></dd>
   <dt><%= Inn.human_attribute_name('phone') %>:</dt>
   <dd><%= @inn.phone %></dd>
-  <dt>Nota Média:</dt>
-  <dd><%= @inn.average_rating %></dd>
 </div>
 
 <h3>Quartos da <%= @inn.brand_name %></h3>
 
 <%= render partial: 'rooms/rooms', locals: { rooms: @rooms } %>
+
+<% if @ratings.present? %>
+  <div>
+  <dt>Nota Média:</dt>
+  <dd><%= @inn.average_rating.ceil(1) %></dd>
+  <h3>Últimas avaliações</h3>
+  <% @ratings.limit(3).each do |rating| %>
+    <%= render partial: 'ratings/rating', locals: {rating: rating} %>
+  <% end %>
+  </div>
+  <% if @ratings.count > 3 %>
+    <%= link_to 'Ver todas as avaliações', inn_ratings_path(inn_id: @inn.id) %>
+  <% end %>
+<% end %>

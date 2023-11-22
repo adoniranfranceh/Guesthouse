@@ -137,7 +137,7 @@ describe 'Visitante pesquisa por pousada' do
     end
 
     # Assert
-    expect(page).to have_content('Nennhum resultado para ksks')
+    expect(page).to have_content('Nenhum resultado para ksks')
     expect(page).not_to have_content('Pousada Boa Vista')
   end
 end

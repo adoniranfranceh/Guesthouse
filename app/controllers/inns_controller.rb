@@ -6,6 +6,7 @@ class InnsController < ApplicationController
   def show
     @inn = Inn.find(params[:id])
     @rooms = @inn.rooms.available
+    @ratings = @inn.ratings.order(created_at: :desc) if @inn.ratings.present?
   end
 
   def new

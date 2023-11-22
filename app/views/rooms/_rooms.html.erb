@@ -4,7 +4,7 @@
       <%= link_to inn_room_path(id: room.id, inn_id: room.inn.id), class: "list-group-item list-group-item-action" do %>
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1"><%= room.title %></h5>
-          <small>Área: <%= room.dimension %>m²</small>
+          <small>Área do Quarto: <%= room.dimension %>m²</small>
         </div>
         <p class="mb-1"><%= room.description %></p>
         <small>Ocupação Máxima: <%= room.max_occupancy %></small>
