@@ -11,11 +11,19 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <%= link_to 'Home', root_path, class: "navbar-brand" %>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
+    <nav class="navbar navbar-expand-xxl navbar-dark bg-dark" aria-label="Seventh navbar example">
+      <div class="container-fluid">
+        <%= link_to 'Expand at xxl', '#', class: "navbar-brand" %>
+
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarExampleXxl" aria-controls="navbarExampleXxl" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse" id="navbarExampleXxl" style="">
+          <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+            <li class="nav-item">
+              <%= link_to 'Home', root_path, class: "nav-link active", 'aria-current': "page" %>
+            </li>
             <li class="nav-item">
               <%= link_to 'Quartos Disponíveis', rooms_path, class: "nav-link" %>
             </li>
@@ -25,31 +33,16 @@
             <li class="nav-item">
               <%= dynamic_link_inn %>
             </li>
-            <% if admin_signed_in? %>
-              <li class="nav-item">
-                <%= link_to 'Reservas', index_admin_room_reservations_path, class: "nav-link" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Estadias Ativas', actives_room_reservations_path, class: "nav-link" %>
-              </li>
-              <li class="nav-item">
-                <%= button_to 'Sair', destroy_admin_session_path, method: :delete, class: "btn btn-danger" %>
-              </li>
-            <% end %>
-
-            <% if user_signed_in? %>
-              <li class="nav-item">
-                <%= link_to 'Minhas Reservas', room_reservations_path, class: "nav-link" %>
-              </li>
-            <% end %>
+            <%= render 'layouts/shared/for_users' %>
           </ul>
+
+          <%= form_with(url: search_inns_path, method: :get, class: "d-flex") do |f| %>
+            <%= f.label :query, 'Buscar por pousada', class: "visually-hidden" %>
+            <%= f.text_field :query, class: "form-control me-2", placeholder: "Buscar por pousada", 'aria-label': "Buscar" %>
+            <%= f.submit 'Buscar', class: "btn btn-outline-success" %>
+          <% end %>
         </div>
       </div>
-      <%= form_with(url: search_inns_path, method: :get) do |f| %>
-        <%= f.label :query, 'Buscar por pousadas' %>
-        <%= f.text_field :query %>
-        <%= f.submit 'Buscar' %>
-      <% end %>
     </nav>
     <div>
     <div class="container mt-4">

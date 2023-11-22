@@ -1,10 +1,10 @@
 <% if @inns.present? %>
-  <h2>Resultados da busca por <%= @term %> <h2>
+  <h2>Resultados da busca por <%= @term %></h2>
   <p><%= @inns.count %> <%= Inn.model_name.human(count: @inns.count).downcase %> <%= t(:found, count: @inns.count) %></p>
   <div class="list-group">
     <%= render partial: 'shared/inns', locals: { inns: @inns } %>
   </div>
 
 <% else %>
-  <h2>Nennhum resultado para <%= @term %> <h2>
+  <h2>Nenhum resultado para <%= @term %></h2>
 <% end %>
