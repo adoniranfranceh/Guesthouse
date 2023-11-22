@@ -44,7 +44,7 @@ describe 'Usuário cancela uma reserva' do
                 max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
     user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
-    r = RoomReservation.create!(user: user, room: room, check_in: 4.day.from_now, check_out: 8.day.from_now, number_of_guests: 4)
+    r = RoomReservation.create!(user: user, room: room, check_in: 2.days.ago, check_out: 8.day.from_now, number_of_guests: 4, status: :active)
     
     # Act
     login_as(user, scope: :user)

@@ -41,7 +41,9 @@ class RoomReservationsController < ApplicationController
     redirect_to room_reservations_path, notice: "Nova reserva registrada"
   end
 
-  def show; end
+  def show
+    @rating = Rating.new
+  end
 
   def cancel
     if @room_reservation.user != current_user || @room_reservation.less_than_7_days_to_check_in?

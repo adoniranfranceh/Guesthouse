@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_17_153616) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_22_023752) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -58,6 +58,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_17_153616) do
     t.integer "season"
     t.string "season_name"
     t.index ["room_id"], name: "index_price_customizations_on_room_id"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "grade"
+    t.string "comment"
+    t.integer "room_reservation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_reservation_id"], name: "index_ratings_on_room_reservation_id"
   end
 
   create_table "room_reservations", force: :cascade do |t|
@@ -116,6 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_17_153616) do
 
   add_foreign_key "inns", "admins"
   add_foreign_key "price_customizations", "rooms"
+  add_foreign_key "ratings", "room_reservations"
   add_foreign_key "room_reservations", "rooms"
   add_foreign_key "room_reservations", "users"
   add_foreign_key "rooms", "inns"

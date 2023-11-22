@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
   end
   resources :room_reservations, only: [:index] do
+    resources :ratings, only: [:create]
     collection do
       get :index_admin
       get :show_admin

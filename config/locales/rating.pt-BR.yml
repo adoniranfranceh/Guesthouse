@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    models:
+      rating: 'Avaliação'
+    attributes:
+      rating:
+        grade: 'Nota'
+        comment: 'Comentário'

@@ -5,6 +5,24 @@
 	                                                number_of_guests: @room_reservation.number_of_guests } %>
 <p>Total: <%= @room_reservation.total_daily_rates %></p>
 
-<% unless @room_reservation.pending? && @room_reservation.less_than_7_days_to_check_in? %>
+<% if @room_reservation.pending? && !@room_reservation.less_than_7_days_to_check_in? %>
   <%= button_to 'Cancelar', cancel_room_reservation_path(@room_reservation.id) %>
+<% end %>
+
+<% if @room_reservation.closed? %>
+
+  <h2>Avalie sua estadia</h2>
+
+  <%= form_with(model: [@room_reservation, @rating]) do |f| %>
+    <div>
+      <%= f.label :grade %>
+      <%= f.select(:grade, [1, 2, 3, 4, 5]) %>
+    </div>
+    <div>
+      <%= f.label :comment %>
+      <%= f.text_area :comment %>
+    </div>
+
+    <%= f.submit 'Enviar' %>
+  <% end %>
 <% end %>
