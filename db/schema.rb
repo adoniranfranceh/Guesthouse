@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_22_163814) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_22_175028) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_22_163814) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
+    t.float "average_rating"
     t.index ["admin_id"], name: "index_inns_on_admin_id"
   end
 

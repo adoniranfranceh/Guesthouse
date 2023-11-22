@@ -1,7 +1,7 @@
 class RoomReservation < ApplicationRecord
   belongs_to :room
   belongs_to :user
-  has_many :ratings
+  has_one :rating
 
   validates :check_in, :check_out, :number_of_guests, :total_daily_rates, :code, presence: true
   validate :there_is_a_reservation_for_that_date, on: [:create, :confirm]
