@@ -33,6 +33,11 @@ Rails.application.routes.draw do
       post :make_check_out
     end
   end
+  resources :ratings, only: [:show] do
+    get :index_admin, on: :collection
+    get :show_admin, on: :member
+    resources :review_responses, only: [:create]
+  end
   resources :advanced_searches, only: [:index] do
     get :search, on: :collection
   end

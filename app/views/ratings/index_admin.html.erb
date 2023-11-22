@@ -1,0 +1,13 @@
+<h1>Avaliações</h1>
+
+<% if @ratings.present? %>
+  <% @ratings.each do |rating| %>
+    <%= link_to show_admin_rating_path(rating.id) do %>
+      <p>Avaliado por: <%= rating.user.name %></p>
+      <p>Nota: <%= rating.grade %></p>
+      <p>Comentário: <%= rating.comment %></p>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>Ainda não há avaliações</p>
+<% end %>

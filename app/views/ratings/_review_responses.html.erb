@@ -1,0 +1,7 @@
+<% if @rating.review_responses.any? %>
+  <% @rating.review_responses.each do |response| %>
+    <p><%= admin %>: <%= response.comment %></p>
+  <% end %>
+<% else %>
+  <p>Ainda não há respostas</p>
+<% end %>
