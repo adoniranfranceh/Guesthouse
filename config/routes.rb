@@ -42,4 +42,12 @@ Rails.application.routes.draw do
   resources :advanced_searches, only: [:index] do
     get :search, on: :collection
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :inns, only: [:index, :show] do
+        get :search, on: :collection
+      end
+    end
+  end
 end
