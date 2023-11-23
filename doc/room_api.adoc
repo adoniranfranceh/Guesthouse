@@ -1,0 +1,67 @@
+= API de Quartos
+
+Bem-vindo à documentação da API de Quartos. Abaixo estão detalhes dos endpoints disponíveis.
+
+== Listar Todos os Quartos Disponíveis
+
+=== `GET /api/v1/inns/1/rooms`
+
+Este endpoint retorna uma lista de todos os quartos disponíveis.
+
+| Exemplo de Resposta
+----
+[
+  {
+    "id":1,
+    "inn_id":1,
+    "title":"Bangalô Família",
+    "description":"Com vista para o rio e barcos de pesca",
+    "dimension":35,
+    "max_occupancy":6,
+    "daily_rate":300,
+    "private_bathroom":true,
+    "balcony":false,
+    "air_conditioning":true,
+    "tv":true,
+    "wardrobe":true,
+    "safe_available":true,
+    "accessible_for_disabled":true,
+    "for_reservations":"available",
+    "created_at":"2023-11-16T20:31:59.171Z",
+    "updated_at":"2023-11-16T20:31:59.171Z"
+  }
+]
+----
+
+== Mostrar Valor Total da Reserva
+
+=== `GET /api/v1/rooms/1/room_reservations/available`
+
+Este endpoint procura se quarto está dísponível baseado nas informações requeridas
+
+|===
+| Parametros
+| `check_in` (obrigatório): Data de Check In
+| `check_out` (obrigatório): Data de Check Out
+| `number_of_guests` (obrigatório): Número de Hóspedes
+
+| Exemplo de solicitação
+----
+`GET /api/v1/rooms/1/room_reservations/available/?check_in=2023-11-23&check_out=2023-11-24&number_of_guests=3`
+----
+
+| Exemplo de Resposta
+----
+{
+  "status":"disponível",
+  "total":600
+}
+----
+
+| Exemplo de Resposta (Quarto Não Disponível)
+----
+{
+  "status": "não disponível",
+  "info": "O quarto não está disponível para as datas solicitadas."
+}
+----
