@@ -4,7 +4,7 @@ class RoomReservation < ApplicationRecord
   has_one :rating
 
   validates :check_in, :check_out, :number_of_guests, :total_daily_rates, :code, presence: true
-  validate :there_is_a_reservation_for_that_date, on: [:create, :confirm]
+  validate :unavailable_for_date?, on: [:create, :confirm]
   validate :guest_limit, :check_out_is_later
 
   before_validation :total_daily_rates_to_reserve
@@ -14,11 +14,11 @@ class RoomReservation < ApplicationRecord
 
   enum status: { canceled: 0, pending: 5, active: 10, closed: 15 }
 
-  def there_is_a_reservation_for_that_date
-    room_reservation = self.room.room_reservations.where('? <= check_out AND ? >= check_in', self.check_in, self.check_out)
+  def unavailable_for_date?
+    room_reservations = self.room.room_reservations.where('? <= check_out AND ? >= check_in', self.check_in, self.check_out)
                                                   .where.not(status: :canceled)
 
-    if room_reservation.present?
+    if room_reservations.present?
       self.errors.add(:base, "Reserva não disponível entre #{I18n.l(check_in.to_date)} e #{I18n.l(check_out.to_date)}")
     end
   end
