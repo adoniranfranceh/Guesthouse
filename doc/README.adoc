@@ -1,0 +1,83 @@
+= API de Pousadas
+
+Bem-vindo à documentação da API de Pousadas. Aqui estão os detalhes dos endpoints disponíveis.
+
+== Listar Todas as Pousadas Ativas
+
+=== `GET /api/v1/inns`
+
+Este endpoint retorna uma lista de todas as pousadas ativas.
+
+| Exemplo de Resposta
+----
+[
+  {
+    "id":1,
+    "admin_id":1,
+    "brand_name":"Pousada Árvore da Coruja",
+    "corporate_name":"Pousada Guest LTDA",
+    "registration_number":"24469244000186",
+    "phone":"(99)91234-1234",
+    "email":"arvore@email.com.br",
+    "address":"Rua: Pedro Candiago, 725",
+    "neighborhood":"Planalto",
+    "state":"RS",
+    "city":"Gramado",
+    "zip_code":" 95670-000",
+    "description":"Pousada Árvore Da Coruja oferece acomodação com lounge compartilhado.",
+    "payment_methods":"Crédito e Débito",
+    "accepts_pets":true,"usage_policies":"Não é permitido fumar",
+    "check_in":"2000-01-01T15:00:00.000Z",
+    "check_out":"2000-01-01T14:00:00.000Z",
+    "created_at":"2023-11-16T20:31:50.034Z",
+    "updated_at":"2023-11-16T20:31:50.034Z",
+    "status":"active",
+    "average_rating":null
+  }
+]
+----
+
+== Buscar Pousada por Nome
+
+=== `GET /api/v1/inns/search`
+
+Este endpoint permite buscar pousadas pelo nome fantasia.
+
+|===
+| Parâmetros
+| `query` (obrigatório): Termo de busca pelo nome da pousada.
+
+| Exemplo de Solicitação
+----
+GET /api/v1/inns/search?query=Nascer%20do%20Sol
+----
+
+| Exemplo de Resposta
+----
+[
+  {
+    "id":1,
+    "admin_id":1,
+    "brand_name":"Pousada Nascer do Sol",
+    "corporate_name":"Sun LTDA",
+    "registration_number":"38214597000140",
+    "phone":"(99)91999-1234",
+    "email":"sun@email.com.br",
+    "address":"Rua do Norte, 100",
+    "neighborhood":"Lago Negro",
+    "state":"RS",
+    "city":"Gramado",
+    "zip_code":" 95670-000",
+    "description":"Pousada nascer do sol oferece vista para o mar.",
+    "payment_methods":"Crédito, Débito e Expresso",
+    "accepts_pets":false,
+    "usage_policies":"Não é permitido fumar",
+    "check_in":"2000-01-01T16:00:00.000Z",
+    "check_out":"2000-01-01T12:00:00.000Z",
+    "created_at":"2023-11-16T20:31:50.034Z",
+    "updated_at":"2023-11-16T20:31:50.034Z",
+    "status":"active",
+    "average_rating":null
+  }
+]
+----
