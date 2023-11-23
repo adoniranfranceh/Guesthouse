@@ -1,6 +1,7 @@
 class RoomReservation < ApplicationRecord
   belongs_to :room
   belongs_to :user
+  has_one :rating
 
   validates :check_in, :check_out, :number_of_guests, :total_daily_rates, :code, presence: true
   validate :there_is_a_reservation_for_that_date, on: [:create, :confirm]
@@ -43,8 +44,8 @@ class RoomReservation < ApplicationRecord
   end
 
   def guest_departure_when_check_out
-    if status == 'closed' && guest_departure.nil?
-      self.update(guest_departure: Time.current, paid: room.total_price(guest_arrival.to_date, Date.current))
+    if status == 'closed' && guest_departure.nil? && guest_arrival.present?
+      self.update(guest_departure: Time.zone.now, paid: room.total_price(guest_arrival.to_date, Time.zone.now))
     end
   end
 

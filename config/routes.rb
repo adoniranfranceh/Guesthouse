@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root "home#index"
   get 'city/:city' => 'inns#by_city', as: 'by_city'
   resources :inns, only: [:show, :new, :create, :edit, :update] do
+    resources :ratings, only: [:index]
     get :search, on: :collection
     resources :rooms, only: [:show, :new, :create, :edit, :update] do
       resources :price_customizations, only: [:new, :create, :edit, :update]
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
     end
   end
   resources :room_reservations, only: [:index] do
+    resources :ratings, only: [:create, :index]
     collection do
       get :index_admin
       get :show_admin
@@ -31,6 +33,11 @@ Rails.application.routes.draw do
       post :make_check_in
       post :make_check_out
     end
+  end
+  resources :ratings, only: [:show] do
+    get :index_admin, on: :collection
+    get :show_admin, on: :member
+    resources :review_responses, only: [:create]
   end
   resources :advanced_searches, only: [:index] do
     get :search, on: :collection

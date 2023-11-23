@@ -1,0 +1,11 @@
+<h1>Avaliações da <%= @inn.brand_name %></h1>
+
+<% if @ratings.present? %>
+  <% @ratings.each do |rating| %>
+    <%= link_to rating_path(rating.id) do %>
+      <%= render partial: 'rating', locals: {rating: rating} %>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>Ainda não há avaliações</p>
+<% end %>

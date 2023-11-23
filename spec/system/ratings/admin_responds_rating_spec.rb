@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário avalia estadia' do
+describe 'Administrador responde avaliação' do
   it 'a partir da tela inicial' do
     # Arrange
     admin = Admin.create!(name: 'Admin', email: 'admin@admin.com', password: 'password')
@@ -15,50 +15,22 @@ describe 'Usuário avalia estadia' do
                 max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
     user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
-    r = RoomReservation.create!(user: user, room: room, check_in: 3.days.ago, check_out: 1.day.ago, number_of_guests: 4,
+    reservation = RoomReservation.create!(user: user, room: room, check_in: 3.days.ago, check_out: 1.day.ago, number_of_guests: 4,
                                 status: :closed)
-    
-    # Act
-    login_as(user, scope: :user)
-    visit root_path
-    click_on('Minhas Reservas')
-    click_on('Bangalô Família')
-
-    # Assert
-    expect(page).to have_content('Avalie sua estadia')
-    expect(page).to have_field('Nota')
-    expect(page).to have_field('Comentário')
-    expect(page).to have_button('Enviar')
-  end
-
-  it 'e reserva não foi feita o check out' do
-    # Arrange
-    admin = Admin.create!(name: 'Admin', email: 'admin@admin.com', password: 'password')
-    guesthouse = Inn.create!(admin: admin, brand_name: 'Pousada Árvore da Coruja', corporate_name: 'Pousada Guest LTDA',
-                                    registration_number: '24469244000186', phone: '(99)91234-1234', email: 'arvore@email.com.br',
-                                    address: 'Rua: Pedro Candiago, 725', neighborhood: 'Planalto', state: 'RS',
-                                    city: 'Gramado', zip_code: ' 95670-000',
-                                    description: 'Pousada Árvore Da Coruja oferece acomodação com lounge compartilhado.',
-                                    payment_methods: 'Crédito e Débito', accepts_pets: true,
-                                    usage_policies: 'Não é permitido fumar', check_in: '15:00', check_out: '14:00', status: :active)
-    room = Room.create!(inn: guesthouse, title: 'Bangalô Família', description: 'Com vista para o rio e barcos de pesca', dimension: 35,
-                max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
-                tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
-    user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
-    r = RoomReservation.create!(user: user, room: room, check_in: 3.days.ago, check_out: 1.day.ago, number_of_guests: 4,
-                                status: :active)
+    Rating.create(grade: 5, comment: 'Adorei a estadia', room_reservation: reservation, user: user)
 
     # Act
-    login_as(user, scope: :user)
+    login_as(admin, scope: :admin)
     visit root_path
-    click_on('Minhas Reservas')
-    click_on('Bangalô Família')
+    click_on('Avaliações')
+    click_on('Avaliado por: João')
 
     # Assert
-    expect(page).not_to have_content('Avalie sua estadia')
-    expect(page).not_to have_field('Nota')
-    expect(page).not_to have_field('Comentário')
-    expect(page).not_to have_button('Enviar')
+    expect(page).to have_content('Avaliado por: João')
+    expect(page).to have_content('Nota: 5')
+    expect(page).to have_content('Comentário: Adorei a estadia')
+    expect(page).to have_field('Responder João')
+    expect(page).to have_button('Responder')
   end
 
   it 'com sucesso' do
@@ -75,19 +47,14 @@ describe 'Usuário avalia estadia' do
                 max_occupancy: 6, daily_rate: 300, private_bathroom: true, balcony: false, air_conditioning: true,
                 tv: true, wardrobe: true, safe_available: true, accessible_for_disabled: true, for_reservations: :available)
     user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
-    r = RoomReservation.create!(user: user, room: room, check_in: 3.days.ago, check_out: 1.day.ago, number_of_guests: 4,
+    reservation = RoomReservation.create!(user: user, room: room, check_in: 3.days.ago, check_out: 1.day.ago, number_of_guests: 4,
                                 status: :closed)
+    rating = Rating.create(grade: 5, comment: 'Adorei a estadia', room_reservation: reservation, user: user)
 
     # Act
-    login_as(user, scope: :user)
-    visit root_path
-    click_on('Minhas Reservas')
-    click_on('Bangalô Família')
-    select 5, from: 'Nota'
-    fill_in 'Comentário', with: 'Adorei a estadia!'
-    click_on('Enviar')
-
-    # Assert
-    expect(page).to have_content('Avaliação enviada com sucesso!')
+    login_as(admin, scope: :admin)
+    visit show_admin_rating_path(rating.id)
+    fill_in 'Responder João', with: 'Obrigado pelo seu feedback João, ficamos felizes em te receber'
+    click_on('Responder')
   end
 end

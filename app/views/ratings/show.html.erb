@@ -1,0 +1,4 @@
+<%= render partial: 'rating', locals: {rating: @rating} %>
+<% if current_user == @rating.user %>
+  <%= render partial: 'review_responses', locals: { admin: @rating.room_reservation.room.inn.admin.name } %>
+<% end %>
