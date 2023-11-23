@@ -81,3 +81,35 @@ GET /api/v1/inns/search?query=Nascer%20do%20Sol
   }
 ]
 ----
+
+== Exibe uma Pousada
+
+=== `GET /api/v1/inns/1`
+
+Este endpoint retorna apenas uma pousada ativa e existente especificando o id no final.
+
+|Exemplo da resposta
+----
+{
+  "id":1,
+  "admin_id":1,
+  "brand_name":"Pousada Árvore da Coruja",
+  "phone":"(99)91234-1234",
+  "email":"arvore@email.com.br",
+  "address":"Rua: Pedro Candiago,725",
+  "neighborhood":"Planalto",
+  "state":"RS",
+  "city":"Gramado",
+  "zip_code":" 95670-000",
+  "description":"Pousada Árvore Da Coruja oferece acomodação com lounge compartilhado.",
+  "payment_methods":"Crédito e Débito",
+  "accepts_pets":true,
+  "usage_policies":"Não é permitido fumar",
+  "check_in":"2000-01-01T15:00:00.000Z",
+  "check_out":"2000-01-01T14:00:00.000Z",
+  "created_at":"2023-11-16T20:31:50.034Z",
+  "updated_at":"2023-11-16T20:31:50.034Z",
+  "status":"active",
+  "average_rating":4.5
+}
+----
