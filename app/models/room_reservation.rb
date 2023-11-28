@@ -4,7 +4,7 @@ class RoomReservation < ApplicationRecord
   has_one :rating
 
   validates :check_in, :check_out, :number_of_guests, :total_daily_rates, :code, presence: true
-  validate :unavailable_for_date?, on: [:create, :confirm]
+  validate :unavailable_for_date?, on: [:create, :confirm, :available]
   validate :guest_limit, :check_out_is_later
 
   before_validation :total_daily_rates_to_reserve
