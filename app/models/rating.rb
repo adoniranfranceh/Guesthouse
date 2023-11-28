@@ -3,6 +3,8 @@ class Rating < ApplicationRecord
   belongs_to :user
   has_many :review_responses
 
+  validates :grade, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
+
   after_save :calc_average_rating_of_inn
 
   private
