@@ -4,7 +4,7 @@ Bem-vindo à documentação da API de Pousadas. Aqui estão os detalhes dos endp
 
 == Listar Todas as Pousadas Ativas
 
-=== `GET /api/v1/inns`
+=== `GET http://localhost:3000/api/v1/inns`
 
 Este endpoint retorna uma lista de todas as pousadas ativas.
 
@@ -39,7 +39,7 @@ Este endpoint retorna uma lista de todas as pousadas ativas.
 
 == Buscar Pousada por Nome
 
-=== `GET /api/v1/inns/search`
+=== `GET http://localhost:3000/api/v1/inns/search`
 
 Este endpoint permite buscar pousadas pelo nome fantasia.
 
@@ -49,7 +49,7 @@ Este endpoint permite buscar pousadas pelo nome fantasia.
 
 | Exemplo de Solicitação
 ----
-GET /api/v1/inns/search?query=Nascer%20do%20Sol
+GET http://localhost:3000/api/v1/inns/search?query=Nascer%20do%20Sol
 ----
 
 | Exemplo de Resposta
@@ -84,7 +84,7 @@ GET /api/v1/inns/search?query=Nascer%20do%20Sol
 
 == Exibe uma Pousada
 
-=== `GET /api/v1/inns/1`
+=== `GET http://localhost:3000/api/v1/inns/1`
 
 Este endpoint retorna apenas uma pousada ativa e existente especificando o id no final.
 

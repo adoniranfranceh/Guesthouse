@@ -4,7 +4,7 @@ Bem-vindo à documentação da API de Quartos. Abaixo estão detalhes dos endpoi
 
 == Listar Todos os Quartos Disponíveis
 
-=== `GET /api/v1/inns/1/rooms`
+=== `GET http://localhost:3000/api/v1/inns/1/rooms`
 
 Este endpoint retorna uma lista de todos os quartos disponíveis.
 
@@ -35,7 +35,7 @@ Este endpoint retorna uma lista de todos os quartos disponíveis.
 
 == Mostrar Valor Total da Reserva
 
-=== `GET /api/v1/rooms/1/room_reservations/available`
+=== `GET http://localhost:3000/api/v1/rooms/1/room_reservations/available`
 
 Este endpoint procura se quarto está dísponível baseado nas informações requeridas
 
@@ -47,21 +47,37 @@ Este endpoint procura se quarto está dísponível baseado nas informações req
 
 | Exemplo de solicitação
 ----
-`GET /api/v1/rooms/1/room_reservations/available/?check_in=2023-11-23&check_out=2023-11-24&number_of_guests=3`
+`GET http://localhost:3000/api/v1/rooms/1/room_reservations/available/?check_in=2023-11-23&check_out=2023-11-24&number_of_guests=3`
 ----
 
 | Exemplo de Resposta
 ----
 {
-  "status":"disponível",
-  "total":600
+  "status": "disponível",
+  "total": 600
 }
 ----
-
+________________________________________________________________________
+| Erros Provavéis
+----
 | Exemplo de Resposta (Quarto Não Disponível)
 ----
 {
   "status": "não disponível",
   "info": "O quarto não está disponível para as datas solicitadas."
+}
+----
+
+| Exemplo de Resposta (Quando Data Não Estiver No Formato Correto)
+----
+{
+  "info": "Formato de data inválido"
+}
+----
+
+| Exemplo de Resposta (Quando Campo Estiver Em Branco)
+----
+{
+  {"info": "Preencha todos os campos corretamente"}
 }
 ----

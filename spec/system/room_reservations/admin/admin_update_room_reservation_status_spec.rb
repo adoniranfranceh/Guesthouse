@@ -4,6 +4,7 @@ describe 'Administrador altera status de uma reserva' do
    context 'para status active' do
      it 'e faz check in com sucesso' do
       # Arrange
+      travel_to Time.zone.local(2023, 11, 26, 16, 15, 00)
       admin = Admin.create!(name: 'Admin', email: 'admin@admin.com', password: 'password')
       guesthouse = Inn.create!(admin: admin, brand_name: 'Pousada Árvore da Coruja', corporate_name: 'Pousada Guest LTDA',
                               registration_number: '24469244000186', phone: '(99)91234-1234', email: 'arvore@email.com.br',
@@ -24,7 +25,6 @@ describe 'Administrador altera status de uma reserva' do
       visit root_path
       click_on('Reservas')
       click_on('ABCD1234')
-      travel_to Time.zone.local(2023, 11, 26, 16, 15, 00)
       click_on('Fazer check in')
 
       # Assert
