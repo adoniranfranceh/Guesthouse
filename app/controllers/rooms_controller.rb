@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_action :check_admin, only: [:edit, :update, :new, :create, :available, :unavailable]
-  before_action :set_room, only: [:show, :edit, :update, :available, :unavailable]
+  before_action :set_room, only: [:show, :edit, :update, :available, :unavailable, :delete_photo]
   def index
     @rooms = Room.available
   end
@@ -32,6 +32,9 @@ class RoomsController < ApplicationController
   def edit ;end
 
   def update
+    params[:room][:room_photos].each do |photo|
+      @room.room_photos.attach(photo)
+    end
     if @room.update(room_params)
       return redirect_to [@inn, @room], notice: 'Quarto atualizado com sucesso'
     end
@@ -47,6 +50,17 @@ class RoomsController < ApplicationController
   def unavailable
     @room.unavailable!
     redirect_to [@inn, @room], notice: 'Quarto desabilitado para reservas'
+  end
+
+  def delete_photo
+    return redirect_to root_path if current_admin != @room.inn.admin
+    photo_id = params[:photo_id]
+    photo = @room.room_photos.find(photo_id)
+
+    if photo.destroy
+      return redirect_to inn_room_path(inn_id: @room.inn.id, id: @room.id), notice: 'Foto excluída com sucesso.'
+    end
+    redirect_to inn_room_path(inn_id: @room.inn.id, id: @room.id), notice: 'Não foi possível excluir a foto.'
   end
 
   private

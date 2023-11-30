@@ -1,5 +1,8 @@
 <% inns.each do |inn| %>
-  <%= link_to inn, class: 'list-group-item list-group-item-action' do %>
+  <%= link_to inn, class: 'list-group-item list-group-item-action row' do %>
+    <% if inn.inn_photos.present? %>
+      <%= image_tag inn.inn_photos.first, style: 'width: 200px' %>
+    <% end %>
     <h3 class="mb-0"><%= inn.brand_name %></h3>
     <p class="mb-1"><%= inn.city %></p>
   <% end %>

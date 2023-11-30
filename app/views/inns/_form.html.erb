@@ -49,6 +49,7 @@
     <%= f.text_field :payment_methods %>
   </div>
   <div>
+    <%= label_tag 'Aceita Pets?' %>
     <%= f.radio_button :accepts_pets, true %>
     <%= f.label :accepts_pets_true%>
     <%= f.radio_button :accepts_pets, false %>
@@ -65,6 +66,13 @@
     <%= f.label :check_out %>
     <%= f.time_field :check_out %>
   </div>
+
+  <% if action_name == 'edit' %>
+    <div>
+      <%= f.label :inn_photos, 'Adicionar Fotos' %>
+      <%= f.file_field :inn_photos, multiple: true %>
+    </div>
+  <% end %>
 
   <%= f.submit 'Salvar' %>
 <% end %>

@@ -1,5 +1,15 @@
 <h1><%= @room.title %></h1>
 
+<div class="row">
+  <% @room.room_photos.each do |photo| %>
+    <div class="col-md-4">
+      <%= image_tag photo, class: 'img-fluid rounded' %>
+      <% if current_admin == @room.inn.admin %>
+        <%= button_to "Excluir", delete_photo_room_path(id: @room.id, photo_id: photo.id), method: :delete, class:"btn btn-danger" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <p><%= @room.description %></p>
 

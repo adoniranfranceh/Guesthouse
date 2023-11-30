@@ -48,6 +48,10 @@
       <%= f.label :accessible_for_disabled %>
       <%= f.check_box :accessible_for_disabled, {}, true %>
     </div>
+    <div>
+      <%= f.label :room_photos, 'Adicionar Fotos' %>
+      <%= f.file_field :room_photos, multiple: true %>
+    </div>
   </div>
   <%= f.submit 'Salvar' %>
 <% end %>

@@ -1,6 +1,6 @@
 class InnsController < ApplicationController
 	before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
-  before_action :set_inn_and_check_admin, only: [:edit, :update, :active, :inactive, :admin_show]
+  before_action :set_inn_and_check_admin, only: [:edit, :update, :active, :inactive, :admin_show, :delete_photo]
   before_action :check_admin_inn, only: [:new, :create]
   before_action :set_inn_rooms, only: [:show, :admin_show]
   def show
@@ -26,8 +26,11 @@ class InnsController < ApplicationController
   def edit; end
 
   def update
+    params[:inn][:inn_photos].each do |photo|
+      @inn.inn_photos.attach(photo)
+    end
     if @inn.update(inn_params)
-      return redirect_to @inn, notice: 'Pousada atualizada com sucesso'
+      return redirect_to admin_show_inn_path(@inn), notice: 'Pousada atualizada com sucesso'
     end
     flash.now[:notice] = 'Pousada não atualizada'
     render :edit
@@ -53,6 +56,16 @@ class InnsController < ApplicationController
   def inactive
     @inn.inactive!
     redirect_to @inn, notice: 'Sua pousada está inativa'
+  end
+
+  def delete_photo
+    photo_id = params[:photo_id]
+    photo = @inn.inn_photos.find(photo_id)
+
+    if photo.destroy
+      return redirect_to admin_show_inn_path(@inn), notice: 'Foto excluída com sucesso.'
+    end
+    redirect_to admin_show_inn_path(@inn), notice: 'Não foi possível excluir a foto.'
   end
 
   private

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root "home#index"
   get 'city/:city' => 'inns#by_city', as: 'by_city'
   resources :inns, only: [:show, :new, :create, :edit, :update] do
+    delete 'delete_photo/:photo_id', to: 'inns#delete_photo', as: 'delete_photo', on: :member
     resources :ratings, only: [:index]
     get :search, on: :collection
     resources :rooms, only: [:show, :new, :create, :edit, :update] do
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
     get :admin_show, on: :member
   end
   resources :rooms, only: [:index] do
+    delete 'delete_photo/:photo_id', to: 'rooms#delete_photo', as: 'delete_photo', on: :member
     resources :room_reservations, only: [:new, :create, :show] do
       get 'confirm', on: :collection
     end

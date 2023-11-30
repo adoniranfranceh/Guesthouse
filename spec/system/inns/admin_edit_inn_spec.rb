@@ -36,6 +36,7 @@ describe 'Administrador edita pousada' do
     expect(page).to have_field('Políticas de Uso', with: 'Não é permitido fumar')
     expect(page).to have_field('Check in', with: '15:00:00.000')
     expect(page).to have_field('Check out', with: '14:00:00.000')
+    expect(page).to have_field('Adicionar Fotos')
   end
 
   it 'com sucesso' do
