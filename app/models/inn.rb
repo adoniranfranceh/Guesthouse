@@ -10,6 +10,8 @@ class Inn < ApplicationRecord
             :payment_methods, :usage_policies, :check_in, :check_out, presence: true
   validates :accepts_pets, inclusion: { in: [true, false] }
   validates :registration_number, uniqueness: true
+  validate :cnpj_is_valid?
+
   enum status: { inactive: 0, active: 5 }
 
   def full_description
@@ -18,5 +20,13 @@ class Inn < ApplicationRecord
 
   scope :search_for_inns, ->(term) do
     where('inns.neighborhood LIKE ? OR inns.city LIKE ? OR inns.brand_name LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%")
+  end
+
+  private
+
+  def cnpj_is_valid?
+    if CNPJ.valid?(self.registration_number).nil?
+      errors.add(:registration_number, 'inválido')
+    end
   end
 end

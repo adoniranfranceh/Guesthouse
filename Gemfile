@@ -28,6 +28,7 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem "cpf_cnpj"
 gem "devise"
 gem "bootstrap"
 gem "sassc-rails"

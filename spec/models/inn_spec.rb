@@ -79,5 +79,19 @@ RSpec.describe Inn, type: :model do
         expect(other_guesthouse.valid?).to be_falsey
       end
     end
+    context 'CNPJ' do
+      it 'false quando cnpj for inválido' do
+        admin = Admin.create!(name: 'Admin', email: 'admin@admin.com', password: 'password')
+        guesthouse = Inn.create(admin: admin, brand_name: 'Pousada Árvore da Coruja', corporate_name: 'Pousada Guest LTDA',
+                            registration_number: '123123123', phone: '(99)91234-1234', email: 'arvore@email.com.br',
+                            address: 'Rua: Pedro Candiago, 725', neighborhood: 'Planalto', state: 'RS',
+                            city: 'Gramado', zip_code: ' 95670-000',
+                            description: 'Pousada Árvore Da Coruja oferece acomodação com lounge compartilhado.',
+                            payment_methods: 'Crédito e Débito', accepts_pets: true,
+                            usage_policies: 'Não é permitido fumar', check_in: '15:00', check_out: '14:00')
+        expect(guesthouse.valid?).to be_falsey
+        expect(guesthouse.errors.full_messages).to include('CNPJ inválido')
+      end
+    end
   end
 end
