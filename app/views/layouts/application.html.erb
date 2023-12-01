@@ -34,6 +34,9 @@
               <%= dynamic_link_inn %>
             </li>
             <%= render 'layouts/shared/for_users' %>
+            <li class="nav-item">
+              <%= link_to 'Entre ou registre-se', new_user_session_path, class: "nav-link" %>
+            </li>
           </ul>
 
           <%= form_with(url: search_inns_path, method: :get, class: "d-flex") do |f| %>
