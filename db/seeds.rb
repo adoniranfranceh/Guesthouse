@@ -12,11 +12,11 @@ admin = Admin.create!(name: 'Admin', email: 'admin@admin.com', password: 'passwo
 
 inn = Inn.create!(
   admin: admin,
-  brand_name: 'Pousada Árvore da Coruja',
-  corporate_name: 'Pousada Guest LTDA',
+  brand_name: 'Pousada Vila Mar',
+  corporate_name: 'VVMM LTDA',
   registration_number: '24469244000186',
   phone: '(99)91234-1234',
-  email: 'arvore@email.com.br',
+  email: 'vilamar@email.com.br',
   address: 'Rua: Pedro Candiago, 725',
   neighborhood: 'Planalto',
   state: 'RS',
@@ -30,7 +30,7 @@ inn = Inn.create!(
   check_out: '14:00',
   status: :active
 )
-inn.inn_photos.attach(io: File.open('spec/fixture/files/pousada.png'), filename: 'inn_image.jpg')
+inn.inn_photos.attach(io: File.open(Rails.root.join('spec/fixtures/files/pousada.png')), filename: 'inn_image.jpg')
 
 room = Room.create!(
   inn: inn,
@@ -48,25 +48,25 @@ room = Room.create!(
   accessible_for_disabled: true,
   for_reservations: :available
 )
-room.room_photos.attach(io: File.open('spec/fixture/files/quarto.jpeg'), filename: 'room_image.jpg')
+room.room_photos.attach(io: File.open(Rails.root.join('spec/fixtures/files/quarto.jpeg')), filename: 'room_image.jpg')
 
 second_room = Room.create!(
   inn: inn,
   title: 'Suíte Executiva',
   description: 'Vista panorâmica para a cidade',
-  dimension: 40
-  max_occupancy: 7
-  daily_rate: 450
-  private_bathroom: true
-  balcony: true
-  air_conditioning: true
-  tv: true
-  wardrobe: true
-  safe_available: true
-  accessible_for_disabled: true
+  dimension: 40,
+  max_occupancy: 7,
+  daily_rate: 450,
+  private_bathroom: true,
+  balcony: true,
+  air_conditioning: true,
+  tv: true,
+  wardrobe: true,
+  safe_available: true,
+  accessible_for_disabled: true,
   for_reservations: :available
 )
-second_room.room_photos.attach(io: File.open('spec/fixture/files/quarto.jpeg'), filename: 'room_image.jpg')
+second_room.room_photos.attach(io: File.open(Rails.root.join('spec/fixtures/files/suíte.png')), filename: 'second_room_image.jpg')
 
 user = User.create!(name: 'João', cpf: '11169382002', email: 'joao@email.com', password: 'password')
 
