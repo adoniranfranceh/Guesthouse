@@ -9,7 +9,7 @@
   <%= button_to 'Cancelar', cancel_room_reservation_path(@room_reservation.id) %>
 <% end %>
 
-<% if @room_reservation.closed? %>
+<% if @room_reservation.closed? && @rating.nil? %>
 
   <h2>Avalie sua estadia</h2>
 
@@ -26,3 +26,6 @@
     <%= f.submit 'Enviar' %>
   <% end %>
 <% end %>
+
+
+<%= link_to 'Sua avaliação', rating_path(@room_reservation.id) if @rating.present? %>

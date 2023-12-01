@@ -22,7 +22,10 @@ describe 'Usuário vê resposta de sua avaliação' do
 
     # Act
     login_as(user, scope: :user)
-    visit rating_path(reservation.id)
+    visit root_path
+    click_on 'Minhas Reservas'
+    click_on reservation.code
+    click_on 'Sua avaliação'
 
     # Assert
     expect(page).to have_content('Carlos: Obrigado pelo seu feedback João, ficamos felizes em te receber')
